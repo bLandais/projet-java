@@ -3,6 +3,7 @@ package destin;
 import game_elements.Plateau;
 import game_elements.player.Player;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,8 @@ public class Arbitre {
     private static Plateau plateau;
     private static Player[] players;
 
+    private static int tourCounter = 0;
+
     public static void main(String[] args) {
         askNumberPlayers();
         generatePlateau();
@@ -23,6 +26,9 @@ public class Arbitre {
         players = new Player[nbPlayers];
 
         // TODO Choix du banquier parmi les joueurs
+
+        System.out.printf(String.valueOf(lancerDes()));
+
 
     }
 
@@ -46,4 +52,10 @@ public class Arbitre {
         plateau = new Plateau(SIZE_PLATEAU);
         plateau.generate();
     }
+
+    private static int lancerDes() {
+        Random random = new Random();
+        return (random.nextInt(10) + 1); // [0; 9[ + 1 = [1; 10];
+    }
+
 }
