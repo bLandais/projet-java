@@ -3,8 +3,8 @@ jdk:
  - oraclejdk8
  - oraclejdk7
  - openjdk6
-script: mvn -X cobertura:cobertura coveralls:report
+script: mvn cobertura:cobertura coveralls:report
 notifications:
    email: false
 after_success:
-  - mvn -X clean cobertura:cobertura coveralls:report
+  - mvn clean cobertura:cobertura coveralls:report
