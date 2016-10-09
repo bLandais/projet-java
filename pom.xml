@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>destin</groupId>
+    <groupId>projet-java</groupId>
     <version>0.1-SNAPSHOT</version>
-    <artifactId>destins</artifactId>
-    <name>destins</name>
+    <artifactId>projet-java</artifactId>
+    <name>projet-java</name>
 
     <packaging>jar</packaging>
 
@@ -22,7 +22,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.2.0</version>
                 <configuration>
-                    <repoToken>yourcoverallsprojectrepositorytoken</repoToken>
+                    <repoToken>${env.COVERALL_TOKEN}</repoToken>
                 </configuration>
             </plugin>
             <plugin>
