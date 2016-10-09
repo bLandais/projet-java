@@ -3,7 +3,8 @@ jdk:
  - oraclejdk8
  - oraclejdk7
  - openjdk6
+script: mvn -f pom.xml verify
 notifications:
    email: false
 after_success:
-  - mvn pom.xml test jacoco:report coveralls:report
+  - mvn -f pom.xml test jacoco:report coveralls:report
