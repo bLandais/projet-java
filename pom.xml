@@ -30,6 +30,9 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
                     <check>true</check>
                     <format>xml</format>
                     <aggregate>true</aggregate>
