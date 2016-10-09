@@ -27,6 +27,8 @@ public class Player {
         return family;
     }
 
+    public void setSexe(Sexe sexe) { this.sexe = sexe; }
+
     /**
      * Création de l'époux / épouse en cas de mariage
      */

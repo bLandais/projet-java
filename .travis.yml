@@ -6,5 +6,4 @@ jdk:
 notifications:
    email: false
 after_success:
- - gradle cobertura
- - gradle --info coveralls
+  - mvn ./pom.xml test jacoco:report coveralls:report

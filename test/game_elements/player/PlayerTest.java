@@ -36,7 +36,6 @@ public class PlayerTest {
 
     @Test
     public void getSalary() throws Exception {
-
     }
 
     @Test
@@ -56,7 +55,6 @@ public class PlayerTest {
 
     @Test
     public void getPlayerMarried() throws Exception {
-
     }
 
     @Test
