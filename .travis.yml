@@ -6,4 +6,4 @@ jdk:
 notifications:
    email: false
 after_success:
-  - mvn ./pom.xml test jacoco:report coveralls:report
+  - mvn pom.xml test jacoco:report coveralls:report

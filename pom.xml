@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>projet-java</groupId>
     <artifactId>projet-java</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
