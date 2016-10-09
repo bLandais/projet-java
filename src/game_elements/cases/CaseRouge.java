@@ -1,14 +1,12 @@
 package game_elements.cases;
 
 import game_elements.actions.Action;
-import game_elements.cases.Case;
+import game_elements.player.Player;
 
-public class CaseRouge implements Case {
-
-    private Action action;
+public class CaseRouge extends Case {
 
     @Override
-    public void doAction() {
+    public void doAction(Player player) {
 
     }
 

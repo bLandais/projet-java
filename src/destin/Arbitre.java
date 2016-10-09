@@ -27,9 +27,6 @@ public class Arbitre {
 
         // TODO Choix du banquier parmi les joueurs
 
-        System.out.printf(String.valueOf(lancerDes()));
-
-
     }
 
     private static void askNumberPlayers() {
@@ -48,14 +45,21 @@ public class Arbitre {
         }
     }
 
+    /**
+     * Generation du plateau
+     */
     private static void generatePlateau() {
         plateau = new Plateau(SIZE_PLATEAU);
         plateau.generate();
     }
 
+    /**
+     * Lancer aléatoire du dès
+     * @return  Un entier entre [1; 10]
+     */
     private static int lancerDes() {
         Random random = new Random();
-        return (random.nextInt(10) + 1); // [0; 9[ + 1 = [1; 10];
+        return (random.nextInt(10) + 1); // [0; 10[ + 1 = [1; 10];
     }
 
 }
