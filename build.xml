@@ -1,56 +1,56 @@
-<project name="travis playground" default="dist" basedir=".">
-    <description>
-        Continuous Integration for Java Project
-    </description>
-
-    <property name="src" location="src"/>
-    <property name="build" location="build"/>
-    <property name="dist"  location="dist"/>
-    <property name="tests"  location="tests"/>
-    <property name="junit" location="lib/junit.jar"/>
-
-    <path id="classpath.test">
-        <pathelement location="${junit}" />
-        <pathelement location="${tests}" />
-        <pathelement location="${build}/main"/>
-        <pathelement location="${build}/tests"/>
+<?xml version="1.0"?>
+<project name="java-junit-travis-project" default="test" basedir=".">
+    <property name="main.build.dir" value="build/main" />
+    <property name="main.src.dir" value="src" />
+    <property name="test.build.dir" value="build/test" />
+    <property name="test.src.dir" value="src" />
+    <path id="classpath.base">
+        <fileset dir="." includes="**/*.jar" />
     </path>
-
-    <target name="init">
-        <tstamp/>
-        <mkdir dir="${build}"/>
-        <mkdir dir="${build}/tests"/>
-        <mkdir dir="${build}/main"/>
-    </target>
-
-    <target name="compile" depends="init" description="compile">
-        <javac srcdir="${src}" destdir="${build}/main"/>
-        <javac srcdir="${tests}" destdir="${build}/tests">
-            <classpath>
-                <pathelement location="${junit}"/>
-            </classpath>
+    <path id="classpath.test">
+        <fileset dir="." includes="**/*.jar" />
+        <pathelement location="lib/junit-4.11.jar" />
+        <pathelement location="${main.build.dir}"/>
+        <path refid="classpath.base" />
+    </path>
+    <target name="test" depends="run, clean" />
+    <target name="compile">
+        <mkdir dir="${main.build.dir}"/>
+        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
+            <classpath refid="classpath.base"/>
         </javac>
     </target>
-
-    <target name="dist" depends="compile">
-        <mkdir dir="${dist}/lib"/>
-        <jar jarfile="${dist}/lib/travis-playground-${DSTAMP}.jar" basedir="${build}"/>
+    <target name="build" depends="compile">
+        <mkdir dir="${test.build.dir}"/>
+        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
+            <!-- Make sure these two libraries are included -->
+            <classpath location="lib/junit-4.11.jar" />
+            <classpath refid="classpath.test"/>
+        </javac>
+        <echo message="Build done" />
     </target>
 
-    <target name="test" depends="compile">
-        <junit fork="yes" haltonfailure="true">
-            <classpath refid="classpath.test" />
-            <batchtest fork="yes" todir="tres">
-                <formatter type="brief" usefile="false"/>
-                <fileset dir="${tests}">
-                    <include name="**/*Test*.java"/>
-                </fileset>
+    <!-- Test and build all files -->
+    <!-- To run this: use "ant" (default) or "ant run" -->
+    <target name="run" depends="build">
+        <junit printsummary="on" haltonfailure="yes">
+            <classpath>
+                <path refid="classpath.test" />
+                <pathelement location="${test.build.dir}"/>
+            </classpath>
+            <formatter type="brief" usefile="false" />
+            <batchtest>
+                <fileset dir="${test.src.dir}" includes="**/*Test*.java" />
             </batchtest>
         </junit>
     </target>
 
-    <target name="clean" description="clean up" >
-        <delete dir="${build}"/>
-        <delete dir="${dist}"/>
+    <!-- delete all class files -->
+    <!-- To run this: use "ant clean" -->
+    <target name="clean">
+        <delete>
+            <fileset dir="${basedir}" includes="**/*.class" />
+        </delete>
+        <echo message="clean done" />
     </target>
 </project>
