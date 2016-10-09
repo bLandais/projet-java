@@ -7,4 +7,4 @@ script: mvn -f pom.xml verify
 notifications:
    email: false
 after_success:
-  - mvn -f pom.xml test jacoco:report coveralls:report
+ - ./gradlew cobertura coveralls
