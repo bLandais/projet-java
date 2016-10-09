@@ -1,5 +1,6 @@
 package game_elements.player;
 
+import game_elements.player.family.Sexe;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Player();
+        player = new Player("PlayerTest", Sexe.MASCULIN);
     }
 
     @Test
@@ -55,6 +56,13 @@ public class PlayerTest {
 
     @Test
     public void getPlayerMarried() throws Exception {
+        assertTrue("joueur pas marié", player.getHusbandOrWife() == null);
+        player.getPlayerMarried();
+        assertTrue("joueur marié", player.getHusbandOrWife() != null);
+        Player player2 = new Player("feminim", Sexe.FEMININ);
+        player2.getPlayerMarried();
+        assertTrue("joueuse mariée", player.getHusbandOrWife() != null);
+        assertTrue("joueuse mariée", player.getFamily().size() > 0);
     }
 
     @Test

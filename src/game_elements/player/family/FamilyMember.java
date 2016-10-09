@@ -9,6 +9,10 @@ public class FamilyMember {
         this.relation = relation;
     }
 
+    public RelationShip getRelation() {
+        return this.relation;
+    }
+
     public void setSexe(Sexe sexe) {
         this.sexe = sexe;
     }

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private Sexe sexe;
+    private final String name;
+    private final Sexe sexe;
     private int money = 0;
     private int debt = 0;
     private int salary = 0;
@@ -16,7 +17,14 @@ public class Player {
     private ArrayList<FamilyMember> family;
     private int position = 0; // position sur le plateau
 
+    public Player(String name, Sexe sexe) {
+        this.name = name;
+        this.sexe = sexe;
+        this.family = new ArrayList<>();
+    }
+
     // Getters
+    public String getName() { return this.name; }
     public int getMoney() { return this.money; }
     public int getDebt() { return this.debt; }
     public int getSalary() { return this.salary; }
@@ -26,8 +34,6 @@ public class Player {
     public ArrayList<FamilyMember> getFamily() {
         return family;
     }
-
-    public void setSexe(Sexe sexe) { this.sexe = sexe; }
 
     /**
      * Création de l'époux / épouse en cas de mariage
@@ -42,6 +48,20 @@ public class Player {
             marriageFamilyMember.setSexe(Sexe.MASCULIN);
         }
         family.add(marriageFamilyMember);
+    }
+
+    /**
+     * Permet d'obtenir le mari ou la femme du joueur
+     * @return Un FamilyMember (femme, ou mari), null si pas marrié
+     */
+    public FamilyMember getHusbandOrWife() {
+        FamilyMember member = null;
+        for(FamilyMember membre : family) {
+            if(membre.getRelation() == RelationShip.EPOUX_EPOUSE) {
+                member = membre;
+            }
+        }
+        return member;
     }
 
     /**
