@@ -6,4 +6,5 @@ jdk:
 notifications:
    email: false
 after_success:
-  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+ - gradle cobertura
+ - gradle --info coveralls
