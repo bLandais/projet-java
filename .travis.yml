@@ -1,8 +1,8 @@
 language: java
-
+script: ./gradlew build jacocoTestReport
 jdk:
   - oraclejdk8
   - openjdk7
 
 after_success:
-  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+  - ./gradlew jacocoRootReport coveralls
