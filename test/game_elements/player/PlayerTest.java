@@ -84,7 +84,7 @@ public class PlayerTest {
 
     @Test
     public void addDebt() throws Exception {
-        assertTrue("getDebt initial", player.getDebt() != 0);
+        assertTrue("getDebt initial", player.getDebt() == 0);
         player.addDebt(-500);
         assertTrue("getDebt nb négatif", player.getDebt() == 500);
         player.addDebt(500);
