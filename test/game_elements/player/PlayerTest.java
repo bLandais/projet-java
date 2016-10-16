@@ -7,12 +7,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PlayerTest {
-
     private static Player player;
 
     @Before
     public void setUp() throws Exception {
         player = new Player("PlayerTest", Sexe.MASCULIN);
+    }
+
+    @Test
+    public void getName() throws Exception {
+        assertTrue("nom initial", player.getName().equals("PlayerTest"));
     }
 
     @Test
@@ -37,6 +41,7 @@ public class PlayerTest {
 
     @Test
     public void getSalary() throws Exception {
+        // TODO
     }
 
     @Test
@@ -79,7 +84,11 @@ public class PlayerTest {
 
     @Test
     public void withdrawMoney() throws Exception {
-
+        int moneyInitiale = player.getMoney();
+        player.withdrawMoney(200);
+        assertTrue("on retire 200€ du compte", player.getMoney() == moneyInitiale - 200);
+        player.withdrawMoney(-200);
+        assertTrue("on retire avec un nombre négatif", player.getMoney() == moneyInitiale - 400);
     }
 
     @Test
@@ -93,7 +102,11 @@ public class PlayerTest {
 
     @Test
     public void refundDebt() throws Exception {
-
+        int detteInitiale = player.getDebt();
+        player.refundDebt(200);
+        assertTrue("rajoute une dette de 200€ donc -200", player.getDebt() == detteInitiale - 200);
+        player.refundDebt(-200);
+        assertTrue("avec un nombre négatif", player.getDebt() == detteInitiale - 400);
     }
 
 }
