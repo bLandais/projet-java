@@ -1,4 +1,4 @@
-package game_elements.player.family;
+package main.game_elements.player.family;
 
 public class FamilyMember {
 
