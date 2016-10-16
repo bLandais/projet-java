@@ -1,4 +1,4 @@
-package main.destin;
+package destin;
 
 public class InputTypeException extends Exception {
 

@@ -1,6 +1,6 @@
-package main.game_elements.cases;
+package game_elements.cases;
 
-import main.game_elements.player.Player;
+import game_elements.player.Player;
 
 public class CaseRouge extends Case {
 

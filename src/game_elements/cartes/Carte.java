@@ -1,4 +1,4 @@
-package main.game_elements.cartes;
+package game_elements.cartes;
 
 public class Carte {
 

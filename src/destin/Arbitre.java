@@ -1,8 +1,8 @@
-package main.destin;
+package destin;
 
-import main.game_elements.Plateau;
-import main.game_elements.player.Player;
-import main.game_elements.player.family.Sexe;
+import game_elements.Plateau;
+import game_elements.player.Player;
+import game_elements.player.family.Sexe;
 
 import java.util.Random;
 import java.util.Scanner;

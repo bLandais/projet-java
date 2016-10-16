@@ -1,4 +1,4 @@
-package main.game_elements.actions;
+package game_elements.actions;
 
 public enum ActionType {
     ARGENT,

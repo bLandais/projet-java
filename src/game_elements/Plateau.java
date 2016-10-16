@@ -1,6 +1,6 @@
-package main.game_elements;
+package game_elements;
 
-import main.game_elements.cases.Case;
+import game_elements.cases.Case;
 
 public class Plateau {
     private Case[] cases;
