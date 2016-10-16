@@ -1,8 +1,8 @@
-package game_elements.player;
+package main.game_elements.player;
 
-import game_elements.player.family.FamilyMember;
-import game_elements.player.family.RelationShip;
-import game_elements.player.family.Sexe;
+import main.game_elements.player.family.FamilyMember;
+import main.game_elements.player.family.RelationShip;
+import main.game_elements.player.family.Sexe;
 
 import java.util.ArrayList;
 
