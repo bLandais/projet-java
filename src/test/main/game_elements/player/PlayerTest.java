@@ -1,6 +1,6 @@
-package game_elements.player;
+package main.game_elements.player;
 
-import game_elements.player.family.Sexe;
+import main.game_elements.player.family.Sexe;
 import org.junit.Before;
 import org.junit.Test;
 
