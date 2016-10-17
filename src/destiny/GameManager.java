@@ -1,4 +1,4 @@
-package src.destiny;
+package destiny;
 
 import java.io.IOException;
 
