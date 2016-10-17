@@ -1,4 +1,6 @@
-package destiny;
+package src.destiny;
+
+import java.io.IOException;
 
 /**
  * Classe qui gère la dynamique du jeu
@@ -6,7 +8,6 @@ package destiny;
 public class GameManager {
 
     public static void main(String[] args) {
-
+        System.out.println("hello");
     }
-
 }

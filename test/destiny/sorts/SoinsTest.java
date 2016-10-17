@@ -25,7 +25,16 @@ public class SoinsTest {
     public void castOnMover() throws Exception {
         assertTrue("intial no heal", player.getHP() == 120);
         spell_soin.castOnMover(player);
-        assertTrue("heal de 40", player.getHP() == 160);
+        assertTrue("heal de 40, vie max", player.getHP() == 120); // il est au max de sa vie
+        player.damage(20);
+        spell_soin.castOnMover(player);
+        assertTrue("heal de 40, mais vie pas au max", player.getHP() == 120);
+        player.damage(60);
+        spell_soin.castOnMover(player);
+        assertTrue("heal de 40, mais vie pas au max", player.getHP() == 100);
+        player.damage(130); // DEAD
+        spell_soin.castOnMover(player);
+        assertTrue("heal mais il est mort donc incastable", player.getHP() == 0); // Dead
     }
 
 }

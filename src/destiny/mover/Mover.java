@@ -4,26 +4,37 @@ import destiny.sorts.Spell;
 import java.util.ArrayList;
 
 public abstract class Mover {
-    private int HP;
+    private int curHP;
+    private int maxHP;
     private final String name;
     private ArrayList<Spell> spells;
 
     protected Mover(String name, int HP, ArrayList<Spell> spells) {
         this.name = name;
-        this.HP = HP;
+        this.maxHP = HP;
+        this.curHP = HP;
         this.spells = spells;
     }
 
     public void heal(int hpAmount) {
-        this.HP += Math.abs(hpAmount);
+        if(this.curHP <= 0)
+            return; // pas de zombies !
+        if(this.curHP + Math.abs(hpAmount) > this.maxHP)
+            this.curHP = this.maxHP;
+        else
+            this.curHP += Math.abs(hpAmount);
     }
 
     public void damage(int hpDamage) {
-        this.HP -= Math.abs(hpDamage);
+        if(this.curHP <= 0)
+            return; // Dead
+        this.curHP -= Math.abs(hpDamage);
+        if(this.curHP < 0)
+            this.curHP = 0; // affichage
     }
 
-    public int getHP() { return this.HP; }
-    protected void setHP(int HP) { this.HP = HP; }
+    public int getHP() { return this.curHP; }
+    protected void setHP(int HP) { this.curHP = HP; }
 
     public String getName() { return this.name; }
 

@@ -1,4 +1,4 @@
-package destiny;
+package src.destiny;
 
 import java.util.ArrayList;
 
