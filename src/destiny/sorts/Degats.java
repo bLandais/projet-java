@@ -12,6 +12,8 @@ public class Degats extends Spell {
 
     @Override
     public void castOnMover(Mover mover) {
-        mover.damage(hpDamage);
+        if(mover.getVulnerable()) {
+            mover.damage(hpDamage);
+        }
     }
 }

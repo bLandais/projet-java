@@ -8,12 +8,26 @@ public abstract class Mover {
     private int maxHP;
     private final String name;
     private ArrayList<Spell> spells;
+    private boolean isVulnerable;
 
     protected Mover(String name, int HP, ArrayList<Spell> spells) {
         this.name = name;
         this.maxHP = HP;
         this.curHP = HP;
         this.spells = spells;
+        this.isVulnerable = true;
+    }
+
+    /**
+     * Fonction qui permet de définir si un monstre est vulnerable (tours limité)
+     * @param isVulnerable  True : vulnerable, par défaut
+     */
+    public void setVulnerable(boolean isVulnerable) {
+        this.isVulnerable = isVulnerable;
+    }
+
+    public boolean getVulnerable()  {
+        return this.isVulnerable;
     }
 
     public void heal(int hpAmount) {
@@ -43,4 +57,8 @@ public abstract class Mover {
 
     public abstract void castSpell();
 
+    public Mover getClosestMover() {
+        // TODO
+        return null;
+    }
 }
