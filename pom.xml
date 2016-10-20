@@ -143,7 +143,7 @@
                 <!-- Specify classes to ignore in code coverage -->
                 <configuration>
                     <excludes>
-                        <exclude>**/ui/**</exclude>
+                        <exclude>**/exceptions/**</exclude>
                         <exclude>**/StartSolverUi**</exclude>
                     </excludes>
                 </configuration>

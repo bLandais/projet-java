@@ -8,7 +8,7 @@ import java.io.IOException;
 public class GameManager {
 
     public static void main(String[] args) {
-        System.out.println("hello");
+        System.out.println("Bienvenue dans Destiny");
     }
 
 }

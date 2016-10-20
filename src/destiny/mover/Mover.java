@@ -9,6 +9,7 @@ public abstract class Mover {
     private final String name;
     private ArrayList<Spell> spells;
     private boolean isVulnerable;
+    private int defense;
 
     protected Mover(String name, int HP, ArrayList<Spell> spells) {
         this.name = name;
@@ -16,6 +17,7 @@ public abstract class Mover {
         this.curHP = HP;
         this.spells = spells;
         this.isVulnerable = true;
+        this.defense = 100; // TODO : Default ?
     }
 
     /**
@@ -49,6 +51,15 @@ public abstract class Mover {
 
     public int getHP() { return this.curHP; }
     protected void setHP(int HP) { this.curHP = HP; }
+
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
 
     public String getName() { return this.name; }
 
