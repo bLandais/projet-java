@@ -1,5 +1,7 @@
 package destiny.mover;
 
+import destiny.inventory.Item;
+import destiny.inventory.ItemEffect;
 import destiny.sorts.Degats;
 import destiny.sorts.Soutiens;
 import destiny.sorts.Spell;
