@@ -10,6 +10,15 @@ public abstract class Mover {
     private ArrayList<Spell> spells;
     private boolean isVulnerable;
     private int defense;
+    private float damageIncrease;
+
+    public float getDamageIncrease() {
+        return damageIncrease;
+    }
+
+    public void setDamageIncrease(float damageIncrease) {
+        this.damageIncrease = damageIncrease;
+    }
 
     protected Mover(String name, int HP, ArrayList<Spell> spells) {
         this.name = name;
@@ -17,7 +26,8 @@ public abstract class Mover {
         this.curHP = HP;
         this.spells = spells;
         this.isVulnerable = true;
-        this.defense = 100; // TODO : Default ?
+        this.defense = 200; // TODO : Default ?
+        this.damageIncrease = 1.0f;
     }
 
     /**
@@ -51,7 +61,6 @@ public abstract class Mover {
 
     public int getHP() { return this.curHP; }
     protected void setHP(int HP) { this.curHP = HP; }
-
 
     public int getDefense() {
         return defense;

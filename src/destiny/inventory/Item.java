@@ -19,6 +19,7 @@ public class Item {
                 break;
             case DEFENSE_INCREASE: // TODO
                 this.quantity--;
+                mover.setDefense(mover.getDefense() + 50);
                 break;
             default:
                 break;

@@ -20,6 +20,9 @@ public class Soutiens extends Spell {
      */
     @Override
     public void castOnMover(Mover mover) {
-
+        super.castOnMover(mover);
+        if(mover.getHP() > 0) { // is mover alive ?
+            mover.setDamageIncrease(damageIncrease);
+        }
     }
 }
