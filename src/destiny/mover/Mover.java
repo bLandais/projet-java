@@ -77,8 +77,4 @@ public abstract class Mover {
 
     public abstract void castSpell(Spell spell);
 
-    public Mover getClosestMover() {
-        // TODO
-        return null;
-    }
 }

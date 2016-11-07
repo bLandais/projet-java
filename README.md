@@ -34,9 +34,9 @@
 
 * **JOUEUR**:
     * PDV de base : 200
-    * chance d'esquive de base : 5%
-    * chance de CoupCritique de base : 20% --> hausse des degats de 50%
-    * chance d'echec critique de base: 5% --> echec de l'attaque
+    * Chance d'esquive de base : 5%
+    * Chance de CoupCritique de base : 20% --> hausse des degats de 50%
+    * Chance d'echec critique de base: 5% --> echec de l'attaque
 
 
 * **MONSTRES ( Monstre 1 au Monstre 11)**:

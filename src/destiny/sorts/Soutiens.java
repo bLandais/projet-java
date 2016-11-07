@@ -25,4 +25,9 @@ public class Soutiens extends Spell {
             mover.setDamageIncrease(damageIncrease);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Soutiens : " + damageIncrease * 100 + "% des dégats normaux - " + super.toString();
+    }
 }

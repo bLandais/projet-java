@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 public class GameManager {
 
+    private static final int CODE_INVENTORY = 1;
+    private static final int CODE_SPELLS = 2;
     private static Player player;
 
     public static void main(String[] args) {
@@ -32,6 +34,9 @@ public class GameManager {
             // Erreur lors de l'importation : on crée une nouvelle partie
 
         }
+
+        manageInventory();
+        manageActions();
 
     }
 
@@ -65,11 +70,14 @@ public class GameManager {
     }
 
     public static void manageInventory() {
-
+        System.out.printf(player.getInventory().toString());
     }
 
     public static void manageActions() {
-
+        System.out.println(CODE_SPELLS +  ") ** Sorts **");
+        for(Spell spell : player.getSorts()) {
+            System.out.println("\t" + spell.toString());
+        }
     }
 
     public static void generateLevel() {

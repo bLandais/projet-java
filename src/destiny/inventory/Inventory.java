@@ -14,7 +14,7 @@ public class Inventory {
 
     @Override
     public String toString() {
-        String str = "Espace disponible : " + items.size() + "/" + nbSlots + "\n";
+        String str = "** Inventaire ** - Espace disponible : " + items.size() + "/" + nbSlots + "\n";
         for(Item item : items)
             str += item.toString() + "\n";
         return str;

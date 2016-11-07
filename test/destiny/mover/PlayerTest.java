@@ -26,7 +26,7 @@ public class PlayerTest {
 
     @Test
     public void castSpell() throws Exception {
-        player.castSpell();
+        player.castSpell(player.getSorts().get(0));
         // TODO
     }
 

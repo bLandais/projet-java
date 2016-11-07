@@ -17,4 +17,9 @@ public class Degats extends Spell {
             mover.damage(hpDamage);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Degats -" + hpDamage + "hp - " + super.toString();
+    }
 }

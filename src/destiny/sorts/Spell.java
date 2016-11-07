@@ -26,4 +26,9 @@ public class Spell {
     public void castOnMover(Mover mover) {
         this.currentRound++;
     }
+
+    @Override
+    public String toString() {
+        return "Attente: (" + currentRound + "/" + rechargeRound + ")";
+    }
 }

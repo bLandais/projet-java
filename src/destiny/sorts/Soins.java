@@ -19,4 +19,9 @@ public class Soins extends Spell {
         super.castOnMover(mover);
         mover.heal(hpHeal);
     }
+
+    @Override
+    public String toString() {
+        return "Soins +" + hpHeal + "hp - " + super.toString();
+    }
 }
