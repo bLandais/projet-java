@@ -10,8 +10,13 @@ public class Soins extends Spell {
         this.hpHeal = hpHeal;
     }
 
+    /**
+     * Lance le sort courant sur un
+     * @param mover     Mover (monstre, player) sur lequel sera lancé le sort
+     **/
     @Override
     public void castOnMover(Mover mover) {
+        super.castOnMover(mover);
         mover.heal(hpHeal);
     }
 }
