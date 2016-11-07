@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Player extends Mover {
 
     private Inventory inventory;
+    private Mover target;
 
     public Player(String name, int HP, ArrayList<Spell> spells) {
         super(name, HP, spells);
@@ -15,8 +16,12 @@ public class Player extends Mover {
 
     public Inventory getInventory() { return this.inventory; }
 
-    public void castSpell() {
-
+    @Override
+    public void castSpell(Spell spell) {
+        ArrayList<Spell> lstSpells = super.getSorts();
+        if(lstSpells.contains(spell)) {
+            spell.castOnMover(target);
+        }
     }
 
 }

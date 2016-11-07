@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public abstract class Mover {
     private int curHP;
     private int maxHP;
-    private final String name;
-    private ArrayList<Spell> spells;
+    protected final String name;
+    protected ArrayList<Spell> spells;
     private boolean isVulnerable;
     private int defense;
     private float damageIncrease;
@@ -75,7 +75,7 @@ public abstract class Mover {
     public ArrayList<Spell> getSorts() { return this.spells; }
     public void setSorts(ArrayList<Spell> sorts) { this.spells = sorts; }
 
-    public abstract void castSpell();
+    public abstract void castSpell(Spell spell);
 
     public Mover getClosestMover() {
         // TODO

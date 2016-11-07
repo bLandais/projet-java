@@ -7,11 +7,21 @@ public class Spell {
     protected int rechargeRound = 3; // Minimum round before re-use the spell
     protected int currentRound = 0; // Actual round counter
 
-    public float getPercentCritic() { return this.percentCritic; }
-    public int getRechargeRound() { return this.rechargeRound; }
+    public float getPercentCritic() {
+        return this.percentCritic;
+    }
 
-    public void setPercentCritic(float percentCritic) { this.percentCritic = percentCritic; }
-    public void setRechargeRound(int rechargeRound) { this.rechargeRound = rechargeRound; }
+    public int getRechargeRound() {
+        return this.rechargeRound;
+    }
+
+    public void setPercentCritic(float percentCritic) {
+        this.percentCritic = percentCritic;
+    }
+
+    public void setRechargeRound(int rechargeRound) {
+        this.rechargeRound = rechargeRound;
+    }
 
     public void castOnMover(Mover mover) {
         this.currentRound++;

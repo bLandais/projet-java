@@ -14,7 +14,7 @@ public class Monster extends Mover implements Boss {
     }
 
     @Override
-    public void castSpell() {
+    public void castSpell(Spell spell) {
         // Only cast damage spells TODO : Sure about that ?
         ArrayList<Spell> spells = this.getSorts();
         Mover closestMover = this.getClosestMover();

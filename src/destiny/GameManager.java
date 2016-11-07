@@ -1,5 +1,6 @@
 package destiny;
 
+import destiny.exceptions.ImporterException;
 import destiny.mover.Player;
 import destiny.sorts.Degats;
 import destiny.sorts.Soins;
@@ -22,6 +23,16 @@ public class GameManager {
         String name = askPlayerName();
         ArrayList<Spell> lstSpells = getDefaultSpellsList();
         player = new Player(name, 200, lstSpells);
+
+        try {
+
+            throw new ImporterException();
+        }
+        catch(ImporterException ex) {
+            // Erreur lors de l'importation : on crée une nouvelle partie
+
+        }
+
     }
 
     private static String askPlayerName() {
