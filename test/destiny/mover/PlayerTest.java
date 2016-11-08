@@ -22,6 +22,7 @@ public class PlayerTest {
         spells.add(new Soutiens(1.2f));
         spells.add(new Degats(15)); // We do not care the spells for now
         player = new Player("First", 150, spells);
+        player.changeTarget(new Monster("monster", 100, spells, false));
     }
 
     @Test

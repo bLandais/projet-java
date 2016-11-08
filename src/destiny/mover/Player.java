@@ -16,6 +16,10 @@ public class Player extends Mover {
 
     public Inventory getInventory() { return this.inventory; }
 
+    public void changeTarget(Mover target) {
+        this.target = target;
+    }
+
     @Override
     public void castSpell(Spell spell) {
         ArrayList<Spell> lstSpells = super.getSorts();
