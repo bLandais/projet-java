@@ -16,12 +16,16 @@ import java.util.Scanner;
  */
 public class GameManager {
 
+    private static boolean isGameFinished = false;
+
+    private static Scanner scanner;
     private static final int CODE_INVENTORY = 1;
     private static final int CODE_SPELLS = 2;
     private static Player player;
 
     public static void main(String[] args) {
         System.out.println("Bienvenue dans Destiny");
+        scanner = new Scanner(System.in);
         String name = askPlayerName();
         ArrayList<Spell> lstSpells = getDefaultSpellsList();
         player = new Player(name, 200, lstSpells);
@@ -35,14 +39,12 @@ public class GameManager {
 
         }
 
-        manageInventory();
-        manageActions();
+        manageGame();
 
     }
 
     private static String askPlayerName() {
         String name = "";
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Quel est votre nom ? ");
         name = scanner.nextLine();
         while(name.isEmpty()) {
@@ -69,19 +71,49 @@ public class GameManager {
         return lstSpells;
     }
 
-    public static void manageInventory() {
+    private static void showInventory() {
         System.out.printf(player.getInventory().toString());
     }
 
-    public static void manageActions() {
-        System.out.println(CODE_SPELLS +  ") ** Sorts **");
+    private static void showActions() {
+        System.out.println("** Sorts **");
+        int i = 0;
         for(Spell spell : player.getSorts()) {
-            System.out.println("\t" + spell.toString());
+            System.out.println("\t" + i + ") " + spell.toString());
+            i++;
         }
     }
 
-    public static void generateLevel() {
+    private static void manageGame() {
+        while (!isGameFinished) {
+            showInventory();
+            showActions();
 
+            // On regarde quel action il veut faire
+            manageActions();
+        }
+    }
+
+    private static void manageActions() {
+        System.out.print("Tapez le numero / lettre de l'action souhaitée : ");
+        String inputAction = "";
+        boolean actionFind = false;
+        while(inputAction.isEmpty() || !actionFind) {
+            inputAction = scanner.nextLine();
+            if(inputAction.equals("l")) {
+                actionFind = true;
+                player.getInventory().showInventory(); // TODO : A corriger
+            }
+        }
+
+
+    }
+
+    private static void watchEndGame() {
+        if(player.getHP() <= 0) {
+            System.out.println("------ GAME OVER ------");
+            isGameFinished = true;
+        }
     }
 
 }
