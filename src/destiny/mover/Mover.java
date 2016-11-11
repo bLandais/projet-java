@@ -12,6 +12,9 @@ public abstract class Mover {
     private int defense;
     private float damageIncrease;
 
+    public int getCurrentHP() { return this.curHP; }
+    public int getMaximumHP() { return this.maxHP; }
+
     public float getDamageIncrease() {
         return damageIncrease;
     }
@@ -59,7 +62,6 @@ public abstract class Mover {
             this.curHP = 0; // affichage
     }
 
-    public int getHP() { return this.curHP; }
     protected void setHP(int HP) { this.curHP = HP; }
 
     public int getDefense() {

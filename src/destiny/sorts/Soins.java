@@ -4,9 +4,14 @@ import destiny.mover.Mover;
 
 public class Soins extends Spell {
 
-    private int hpHeal = 0;
+    private int hpHeal;
 
-    public Soins(int hpHeal) {
+    /**
+     * Constructeur du sort de Soin
+     * @param hpHeal    Nombre de points de vie qui seront rajoutés lors du lancement du sort
+     */
+    public Soins(int hpHeal, int rechargeRound) {
+        super.setRechargeRound(rechargeRound);
         this.hpHeal = hpHeal;
     }
 

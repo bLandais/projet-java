@@ -6,7 +6,8 @@ public class Degats extends Spell {
 
     private int hpDamage;
 
-    public Degats(int hpDamage) {
+    public Degats(int hpDamage, int rechargeRound) {
+        super.setRechargeRound(rechargeRound);
         this.hpDamage = hpDamage;
     }
 

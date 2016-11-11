@@ -4,7 +4,7 @@ import destiny.mover.Mover;
 
 public class Soutiens extends Spell {
 
-    private float damageIncrease = 1f;
+    private float damageIncrease;
 
     /**
      * Constructeur de sort de soutiens
@@ -21,7 +21,7 @@ public class Soutiens extends Spell {
     @Override
     public void castOnMover(Mover mover) {
         super.castOnMover(mover);
-        if(mover.getHP() > 0) { // is mover alive ?
+        if(mover.getCurrentHP() > 0) { // is mover alive ?
             mover.setDamageIncrease(damageIncrease);
         }
     }

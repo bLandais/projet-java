@@ -14,6 +14,9 @@ public class Player extends Mover {
         this.inventory = new Inventory(5);
     }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
     public Inventory getInventory() { return this.inventory; }
 
     public void changeTarget(Mover target) {

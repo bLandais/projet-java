@@ -1,6 +1,9 @@
 package destiny.inventory;
 
 public enum ItemEffect {
-    HEAL,
-    DEFENSE_INCREASE
+    FULL_HEAL,
+    DEFENSE_INCREASE,
+    ATTACK,
+    RESET,
+    SURPRISE
 }

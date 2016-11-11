@@ -36,7 +36,7 @@ public class Monster extends Mover implements Boss {
     @Override
     public void regeneration() {
         if(this.isBoss)
-            super.heal(this.getHP() / (1+new Random().nextInt(2)));
+            super.heal(this.getCurrentHP() / (1+new Random().nextInt(2)));
     }
 
     @Override

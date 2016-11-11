@@ -31,9 +31,12 @@ public class Inventory {
     public ArrayList<Item> getItems() { return this.items; }
 
     public void showInventory() {
-        String str = "Liste des items dans l'inventaire :";
-        for(Item item : items)
-            str += item.toString() + "\n";
+        String str = "Liste des items dans l'inventaire :\n";
+        int i = 0;
+        for(Item item : items) {
+            str += i + ") " + item.toString() + "\n";
+            i++;
+        }
         System.out.println(str);
     }
 }
