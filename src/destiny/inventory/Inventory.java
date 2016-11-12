@@ -14,7 +14,7 @@ public class Inventory {
 
     @Override
     public String toString() {
-        String str = "** Inventaire ** - Espace disponible : " + items.size() + "/" + nbSlots + " -- Appuyez sur l\n";
+        String str = "** Inventaire ** - Espace : " + items.size() + "/" + nbSlots + " -- Appuyez sur l\n";
         return str;
     }
 
@@ -31,10 +31,10 @@ public class Inventory {
     public ArrayList<Item> getItems() { return this.items; }
 
     public void showInventory() {
-        String str = "Liste des items dans l'inventaire :\n";
+        String str = "Liste des items dans l'inventaire :";
         int i = 0;
         for(Item item : items) {
-            str += i + ") " + item.toString() + "\n";
+            str += "\n\t" + i + ") " + item.toString() + "";
             i++;
         }
         System.out.println(str);

@@ -21,6 +21,12 @@ public class Item {
                 this.quantity--;
                 mover.setDefense(mover.getDefense() + 50);
                 break;
+            case ATTACK:
+                break;
+            case RESET:
+                break;
+            case SURPRISE:
+                break;
             default:
                 break;
         }

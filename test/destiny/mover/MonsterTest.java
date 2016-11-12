@@ -51,12 +51,12 @@ public class MonsterTest {
         monster.invulnerability();
         assertTrue("monster pas invulnerable", monster.getVulnerable());
         int hpInitial = monster_boss.getCurrentHP();
-        monster_boss.getSorts().get(1).castOnMover(monster_boss);
+        monster_boss.getSorts().get(1).castOnTarget(monster_boss);
         assertTrue("degats sur vulnerable", monster_boss.getCurrentHP() == hpInitial - 15);
         monster_boss.invulnerability();
         assertFalse("variable modifiée", monster_boss.getVulnerable());
         hpInitial = monster_boss.getCurrentHP();
-        monster_boss.getSorts().get(1).castOnMover(monster_boss);
+        monster_boss.getSorts().get(1).castOnTarget(monster);
         assertTrue("pas de changement HP", monster_boss.getCurrentHP() == hpInitial);
         // TODO : passer des tours et voir si l'invulnerabilité s'enleve
     }

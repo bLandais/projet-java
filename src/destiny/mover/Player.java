@@ -27,7 +27,7 @@ public class Player extends Mover {
     public void castSpell(Spell spell) {
         ArrayList<Spell> lstSpells = super.getSorts();
         if(lstSpells.contains(spell)) {
-            spell.castOnMover(target);
+            spell.castOnTarget(); // TODO
         }
     }
 

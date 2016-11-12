@@ -1,5 +1,6 @@
 package destiny.sorts;
 
+import destiny.mover.PlayerTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class SpellTest {
 
     @Test
     public void setRechargeRound() throws Exception {
-        spell = new Soins(200, 3);
+        spell = new Soins(PlayerTest.player, 3);
         assertTrue(spell.getRechargeRound() == 3);
         spell.setRechargeRound(-4);
         assertTrue(spell.getRechargeRound() == 0);

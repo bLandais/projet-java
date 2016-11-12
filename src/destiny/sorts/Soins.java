@@ -8,20 +8,30 @@ public class Soins extends Spell {
 
     /**
      * Constructeur du sort de Soin
-     * @param hpHeal    Nombre de points de vie qui seront rajoutés lors du lancement du sort
+     * @param player    La cible du sort (le joueur pour le sort de soin)
+     * @param rechargeRound  Temps avant de pouvoir reutiliser le sort
      */
-    public Soins(int hpHeal, int rechargeRound) {
+    public Soins(Mover player, int rechargeRound) {
         super.setRechargeRound(rechargeRound);
-        this.hpHeal = hpHeal;
+        super.setTarget(player);
+        this.hpHeal = (int)(player.getMaximumHP() * 0.3);
     }
 
     /**
-     * Lance le sort courant sur un
+     * Lance le sort courant sur la cible en cours
+     **/
+    @Override
+    public void castOnTarget() {
+        castOnTarget(getTarget());
+    }
+
+    /**
+     * Lance le sort courant sur un mover
      * @param mover     Mover (monstre, player) sur lequel sera lancé le sort
      **/
     @Override
-    public void castOnMover(Mover mover) {
-        super.castOnMover(mover);
+    public void castOnTarget(Mover mover) {
+        super.castOnTarget(mover);
         mover.heal(hpHeal);
     }
 

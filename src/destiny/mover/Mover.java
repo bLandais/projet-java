@@ -14,6 +14,7 @@ public abstract class Mover {
 
     public int getCurrentHP() { return this.curHP; }
     public int getMaximumHP() { return this.maxHP; }
+    public void setMaximumHP(int maxHP) { this.maxHP = maxHP; }
 
     public float getDamageIncrease() {
         return damageIncrease;
@@ -62,7 +63,13 @@ public abstract class Mover {
             this.curHP = 0; // affichage
     }
 
-    protected void setHP(int HP) { this.curHP = HP; }
+    protected void setHP(int HP) {
+        if (HP > this.maxHP) {
+            this.curHP = maxHP;
+        }
+        else
+            this.curHP = HP;
+    }
 
     public int getDefense() {
         return defense;

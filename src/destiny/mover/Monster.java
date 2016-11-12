@@ -7,30 +7,21 @@ import java.util.Random;
 
 public class Monster extends Mover implements Boss {
     private boolean isBoss = false;
-    private Mover target;
 
     protected Monster(String name, int HP, ArrayList<Spell> spells, boolean isBoss) {
         super(name, HP, spells);
         this.isBoss = isBoss;
     }
 
-    public void setTarget(Mover mover) {
-        this.target = mover;
-    }
-
-    private Mover getTarget() {
-        return target;
-    }
-
     @Override
     public void castSpell(Spell spell) {
         // Only cast damage spells TODO : Sure about that ?
         ArrayList<Spell> spells = this.getSorts();
-        Mover closestMover = this.getTarget();
+        Mover closestMover = spell.getTarget();
         int nbSpells = spells.size();
         Spell randomSpellChoose = spells.get(new Random().nextInt(nbSpells));
         if(randomSpellChoose != null)
-            randomSpellChoose.castOnMover(closestMover);
+            randomSpellChoose.castOnTarget();
     }
 
     @Override
@@ -51,6 +42,14 @@ public class Monster extends Mover implements Boss {
     public void invulnerability() {
         if (this.isBoss) {
             this.setVulnerable(false);
+        }
+    }
+
+    @Override
+    public void increaseHP() {
+        if(this.isBoss) {
+            this.setMaximumHP(300);
+            this.setHP(300);
         }
     }
 }

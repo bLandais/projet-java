@@ -31,8 +31,8 @@ public class GameManager {
         System.out.println("Bienvenue dans Destiny");
         scanner = new Scanner(System.in);
         String name = askPlayerName();
-        ArrayList<Spell> lstSpells = getDefaultSpellsList();
-        player = new Player(name, 200, lstSpells);
+        player = new Player(name, 200, new ArrayList<Spell>());
+        player.setSorts(getDefaultSpellsList());
         player.setInventory(getDefaultInventory());
 
         try {
@@ -47,6 +47,10 @@ public class GameManager {
 
     }
 
+    /**
+     * Permet de récuperer le nom du joueur
+     * @return  (String) Nom du joueur
+     */
     private static String askPlayerName() {
         String name = "";
         System.out.print("Quel est votre nom ? ");
@@ -69,12 +73,17 @@ public class GameManager {
         ArrayList<Spell> lstSpells = new ArrayList<>();
 
         lstSpells.add(new Degats(100, 0));
-        lstSpells.add(new Soins(50, 3));
+        lstSpells.add(new Soins(player, 3));
         lstSpells.add(new Soutiens(1.10f));
 
         return lstSpells;
     }
 
+    /**
+     * Inventaire par défaut qui comporte 5 items avec chacun un effet différents
+     * et avec des quantités différentes
+     * @return  (Inventory) Inventaire par défaut
+     */
     private static Inventory getDefaultInventory() {
         Inventory inventory = new Inventory(5);
         inventory.addItem(new Item(ItemEffect.FULL_HEAL, 2));
@@ -85,10 +94,16 @@ public class GameManager {
         return inventory;
     }
 
+    /**
+     * Affiche sur la console de l'inventaire (choix des items)
+     */
     private static void showInventory() {
         System.out.printf(player.getInventory().toString());
     }
 
+    /**
+     * Affiche la liste des actions (accueil)s
+     */
     private static void showActions() {
         System.out.println("** Sorts **");
         int i = 0;
@@ -114,24 +129,39 @@ public class GameManager {
     /**
      * Permet de gérer l'entrée utilisateur sur le choix d'un item
      */
-    private static void manageInventory() throws ArgumentActionException, InventoryException {
+    private static void manageInventory() {
         // TODO
         player.getInventory().showInventory();
         boolean itemFind = false;
         while(!itemFind) {
-            System.out.print("Tapez le numero de l'item à utiliser (ou \"e\" pour revenir en arrière) : ");
-            int itemInput = scanner.nextInt();
-            Inventory inventory = player.getInventory();
-            if (itemInput >= 0 && itemInput < inventory.getItems().size()) {
-                if (inventory.getItems().get(itemInput) != null) {
+            try {
+                System.out.print("Tapez le numero de l'item à utiliser (ou \"e\" pour revenir en arrière) : ");
+                String inputAction = scanner.nextLine();
+                if (inputAction.equals("e")) {
                     itemFind = true;
-                    Item item = inventory.getItems().get(itemInput);
-                    if (item.getQuantity() == 0)
-                        throw new InventoryException(InventoryException.ErrorType.EMPTY_ITEM);
+                } else {
+                    int itemInput = Integer.parseInt(inputAction);
+                    Inventory inventory = player.getInventory();
+                    if (itemInput >= 0 && itemInput < inventory.getItems().size()) {
+                        if (inventory.getItems().get(itemInput) != null) {
+                            itemFind = true;
+                            Item item = inventory.getItems().get(itemInput);
+                            if (item.getQuantity() == 0)
+                                throw new InventoryException(InventoryException.ErrorType.EMPTY_ITEM);
+                        }
+                    } else
+                        throw new ArgumentActionException(ArgumentActionException.CaseAction.INVENTORY);
                 }
             }
-            else
-                throw new ArgumentActionException(ArgumentActionException.CaseAction.INVENTORY);
+            catch(InventoryException inventoryException) {
+                inventoryException.displayMessage();
+            }
+            catch(ArgumentActionException argException) {
+                argException.displayMessage();
+            }
+            catch(NumberFormatException numberException) {
+                System.out.println("Saisie incorrecte, veuillez recommencer...");
+            }
         }
     }
 
@@ -167,9 +197,6 @@ public class GameManager {
             }
             catch(NumberFormatException e) {
                 System.out.println("Saisie incorrecte, veuillez recommencer...");
-            }
-            catch(InventoryException e) {
-                e.displayMessage();
             }
         }
     }
