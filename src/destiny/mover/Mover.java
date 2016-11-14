@@ -8,11 +8,15 @@ import java.util.ArrayList;
 public abstract class Mover implements Serializable {
     private int curHP;
     private int maxHP;
-    private final String name;
-    private ArrayList<Spell> spells;
+    protected final String name;
+    protected ArrayList<Spell> spells;
     private boolean isVulnerable;
     private int defense;
     private float damageIncrease;
+
+    public int getCurrentHP() { return this.curHP; }
+    public int getMaximumHP() { return this.maxHP; }
+    public void setMaximumHP(int maxHP) { this.maxHP = maxHP; }
 
     public float getDamageIncrease() {
         return damageIncrease;
@@ -61,8 +65,13 @@ public abstract class Mover implements Serializable {
             this.curHP = 0; // affichage
     }
 
-    public int getHP() { return this.curHP; }
-    protected void setHP(int HP) { this.curHP = HP; }
+    protected void setHP(int HP) {
+        if (HP > this.maxHP) {
+            this.curHP = maxHP;
+        }
+        else
+            this.curHP = HP;
+    }
 
     public int getDefense() {
         return defense;
@@ -77,10 +86,6 @@ public abstract class Mover implements Serializable {
     public ArrayList<Spell> getSorts() { return this.spells; }
     public void setSorts(ArrayList<Spell> sorts) { this.spells = sorts; }
 
-    public abstract void castSpell();
+    public abstract void castSpell(Spell spell);
 
-    public Mover getClosestMover() {
-        // TODO
-        return null;
-    }
 }

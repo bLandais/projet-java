@@ -18,9 +18,9 @@ public class InventoryTest {
     public void setUp() throws Exception {
         ArrayList<Spell> spells = new ArrayList<Spell>();
         spells.add(new Soutiens(1.2f));
-        spells.add(new Degats(15)); // We do not care the spells for now
+        spells.add(new Degats(15, 0)); // We do not care the spells for now
         player = new Player("name", 100, spells);
-        player.getInventory().addItem(new Item(ItemEffect.HEAL, 1));
+        player.getInventory().addItem(new Item(ItemEffect.FULL_HEAL, 1));
         player.getInventory().addItem(new Item(ItemEffect.DEFENSE_INCREASE, 3));
     }
 

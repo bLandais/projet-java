@@ -14,21 +14,20 @@ public class Monster extends Mover implements Boss {
     }
 
     @Override
-    public void castSpell() {
+    public void castSpell(Spell spell) {
         // Only cast damage spells TODO : Sure about that ?
         ArrayList<Spell> spells = this.getSorts();
-        Mover closestMover = this.getClosestMover();
+        Mover closestMover = spell.getTarget();
         int nbSpells = spells.size();
         Spell randomSpellChoose = spells.get(new Random().nextInt(nbSpells));
-        if(randomSpellChoose != null) {
-            randomSpellChoose.castOnMover(closestMover);
-        }
+        if(randomSpellChoose != null)
+            randomSpellChoose.castOnTarget();
     }
 
     @Override
     public void regeneration() {
         if(this.isBoss)
-            super.heal(this.getHP() / (1+new Random().nextInt(2)));
+            super.heal(this.getCurrentHP() / (1+new Random().nextInt(2)));
     }
 
     @Override
@@ -43,6 +42,14 @@ public class Monster extends Mover implements Boss {
     public void invulnerability() {
         if (this.isBoss) {
             this.setVulnerable(false);
+        }
+    }
+
+    @Override
+    public void increaseHP() {
+        if(this.isBoss) {
+            this.setMaximumHP(300);
+            this.setHP(300);
         }
     }
 }

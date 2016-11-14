@@ -4,7 +4,7 @@ import destiny.mover.Mover;
 
 public class Soutiens extends Spell {
 
-    private float damageIncrease = 1f;
+    private float damageIncrease;
 
     /**
      * Constructeur de sort de soutiens
@@ -15,14 +15,25 @@ public class Soutiens extends Spell {
     }
 
     /**
-     * Lance le sort courant sur un autre Mover
-     * @param mover     Cible sur lequel sera lancé le sort
+     * Lance le sort courant sur la cible courante
      */
     @Override
-    public void castOnMover(Mover mover) {
-        super.castOnMover(mover);
-        if(mover.getHP() > 0) { // is mover alive ?
-            mover.setDamageIncrease(damageIncrease);
+    public void castOnTarget() {
+        castOnTarget(target);
+    }
+
+    @Override
+    public void castOnTarget(Mover mover) {
+        super.castOnTarget(mover);
+        if(mover != null) {
+            if (mover.getCurrentHP() > 0) { // is mover alive ?
+                mover.setDamageIncrease(damageIncrease);
+            }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Soutiens : " + damageIncrease * 100 + "% des dégats normaux - " + super.toString();
     }
 }

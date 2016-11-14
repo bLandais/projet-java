@@ -13,13 +13,19 @@ public class Item {
 
     public void useItemOnMover(Mover mover) {
         switch(itemEffect) {
-            case HEAL:
+            case FULL_HEAL:
                 this.quantity--;
-                mover.heal(50); // TODO
+                mover.heal(mover.getMaximumHP() - mover.getCurrentHP());
                 break;
             case DEFENSE_INCREASE: // TODO
                 this.quantity--;
                 mover.setDefense(mover.getDefense() + 50);
+                break;
+            case ATTACK:
+                break;
+            case RESET:
+                break;
+            case SURPRISE:
                 break;
             default:
                 break;
