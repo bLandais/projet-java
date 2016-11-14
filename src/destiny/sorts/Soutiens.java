@@ -2,7 +2,9 @@ package destiny.sorts;
 
 import destiny.mover.Mover;
 
-public class Soutiens extends Spell {
+import java.io.Serializable;
+
+public class Soutiens extends Spell implements Serializable {
 
     private float damageIncrease;
 

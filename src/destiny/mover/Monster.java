@@ -2,10 +2,11 @@ package destiny.mover;
 
 import destiny.sorts.Spell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Monster extends Mover implements Boss {
+public class Monster extends Mover implements Boss, Serializable {
     private boolean isBoss = false;
 
     protected Monster(String name, int HP, ArrayList<Spell> spells, boolean isBoss) {

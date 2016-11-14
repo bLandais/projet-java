@@ -2,7 +2,9 @@ package destiny.inventory;
 
 import destiny.mover.Mover;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private final ItemEffect itemEffect;
     private int quantity;
 

@@ -2,7 +2,9 @@ package destiny.sorts;
 
 import destiny.mover.Mover;
 
-public class Soins extends Spell {
+import java.io.Serializable;
+
+public class Soins extends Spell implements Serializable {
 
     private int hpHeal;
 

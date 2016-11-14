@@ -1,23 +1,20 @@
 package destiny;
 
-import destiny.exceptions.ArgumentActionException;
-import destiny.exceptions.ImporterException;
-import destiny.exceptions.InventoryException;
+import destiny.exceptions.*;
 import destiny.inventory.Inventory;
 import destiny.inventory.Item;
 import destiny.inventory.ItemEffect;
-import destiny.mover.Player;
-import destiny.sorts.Degats;
-import destiny.sorts.Soins;
-import destiny.sorts.Soutiens;
-import destiny.sorts.Spell;
+import destiny.mover.*;
+import destiny.save.SavePlayer;
+import destiny.sorts.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Classe qui gère la dynamique du jeu
- */
+ *  Classe qui gère la dynamique du jeu
+ **/
 public class GameManager {
 
     private static boolean isGameFinished = false;
@@ -36,8 +33,10 @@ public class GameManager {
         player.setInventory(getDefaultInventory());
 
         try {
-
-            throw new ImporterException();
+            SavePlayer.saveMover(player);
+            Mover playerSave = SavePlayer.lireMover();
+            if(playerSave == null)
+                throw new ImporterException();
         }
         catch(ImporterException ex) {
             // Erreur lors de l'importation : on crée une nouvelle partie
@@ -111,6 +110,7 @@ public class GameManager {
             System.out.println("\t" + i + ") " + spell.toString());
             i++;
         }
+        System.out.println("** Sauvegarde ** -- Appuyez sur s");
     }
 
     /**
@@ -180,6 +180,11 @@ public class GameManager {
                 if(inputAction.equals("l")) {
                     actionFind = true;
                     manageInventory();
+                }
+                else if(inputAction.equals("s")) {
+                    actionFind = true;
+                    SavePlayer.saveMover(player);
+                    System.out.println("Sauvegarde effectuée");
                 }
                 else {
                     int actionId = Integer.parseInt(inputAction);

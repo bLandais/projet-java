@@ -2,7 +2,13 @@ package destiny.sorts;
 
 import destiny.mover.Mover;
 
-public class Spell {
+import java.io.Serializable;
+
+/**
+ * La classe Spell est une classe mère de tous les sorts
+ */
+public class Spell implements Serializable {
+
     protected float percentCritic = 0.2f; // Default
     private int rechargeRound = 0; // Minimum round before re-use the spell
     protected int currentRound = 0; // Actual round counter
@@ -46,7 +52,6 @@ public class Spell {
         // TODO
         if (rechargeRound == 0) {
             // Spell peut être lancé directement
-
         } else {
             if (currentRound < rechargeRound) {
                 // Ne peut PAS être lancé !

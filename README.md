@@ -2,7 +2,13 @@
 
 [![Build Status](https://travis-ci.org/bLandais/projet-java.svg?branch=master)](https://travis-ci.org/bLandais/projet-java) [![Coverage Status](https://coveralls.io/repos/github/bLandais/projet-java/badge.svg?branch=master)](https://coveralls.io/github/bLandais/projet-java?branch=master)
 
+Rendu de projet le 28 Novembre à 8h. Envoyer par mail le projet contenant:
 
+- Un .zip ou un .tar une archive `StudentName1_StudentName2` 
+    - Un court rapport
+    - Un dossier de source avec que les *.java.
+    - Tous les autres éléments requis pour executer le projet (fichier d'initialisation).
+    
 ## Règles du jeu
 
 * Jeu solo

@@ -2,7 +2,9 @@ package destiny.sorts;
 
 import destiny.mover.Mover;
 
-public class Degats extends Spell {
+import java.io.Serializable;
+
+public class Degats extends Spell implements Serializable {
 
     private int hpDamage;
 

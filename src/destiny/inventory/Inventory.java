@@ -1,8 +1,9 @@
 package destiny.inventory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inventory {
+public class Inventory implements Serializable {
 
     private final int nbSlots;
     private ArrayList<Item> items;
