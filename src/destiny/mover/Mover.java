@@ -1,9 +1,11 @@
 package destiny.mover;
 
 import destiny.sorts.Spell;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Mover {
+public abstract class Mover implements Serializable {
     private int curHP;
     private int maxHP;
     private final String name;
