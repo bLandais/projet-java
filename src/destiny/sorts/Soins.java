@@ -37,6 +37,10 @@ public class Soins extends Spell implements Serializable {
         mover.heal(hpHeal);
     }
 
+    /**
+     * Permet d'obtenir la description de l'effet de ce sort
+     * @return  Soins + #nbHP hp + Attente (x/x)
+     */
     @Override
     public String toString() {
         return "Soins +" + hpHeal + "hp - " + super.toString();

@@ -1,5 +1,6 @@
 package destiny.save;
 
+import destiny.exceptions.ImporterException;
 import destiny.mover.Mover;
 import destiny.mover.Player;
 
@@ -25,7 +26,7 @@ public class SavePlayer {
      * Deserialisation de l'objet Mover
      * @return L'objet lu depuis le fichier de sauvegarde (ou null en cas d'erreur)
      */
-    public static Mover lireMover() {
+    public static Mover lireMover() throws ImporterException {
         ObjectInputStream ois;
         try {
             ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("save.txt"))));
@@ -33,9 +34,9 @@ public class SavePlayer {
             ois.close();
             return moverSave;
         } catch (IOException e) {
+            throw new ImporterException();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e2) {
-            e2.printStackTrace();
         }
         return null;
     }

@@ -18,7 +18,6 @@ import java.util.Scanner;
  **/
 public class GameManager {
 
-
     private static boolean isGameFinished = false;
     private static Scanner scanner;
     private static Player player;
@@ -52,6 +51,7 @@ public class GameManager {
             lstMonsters = getDefaultMonsters();
             currentMonsterIndex = 0;
             player.changeTarget(lstMonsters.get(currentMonsterIndex));
+            ((Monster)player.getTarget()).setTarget(player);
         }
         finally {
             lstMonsters = getDefaultMonsters();
@@ -206,6 +206,10 @@ public class GameManager {
         String inputAction = "";
         boolean actionFind = false;
         while(inputAction.isEmpty() || !actionFind) {
+            if(player.getCurrentHP() == 0) {
+                isGameFinished = true;
+                break;
+            }
             System.out.print("Tapez le numero / lettre de l'action souhaitée : ");
             try {
                 inputAction = scanner.nextLine();
@@ -228,6 +232,10 @@ public class GameManager {
                         if(player.getTarget().getCurrentHP() == 0) {
                             player.changeTarget(getNextTarget());
                         }
+                        System.out.println(player.toString());
+                        System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");
+                        if(player.getTarget().getClass().equals(Monster.class))
+                            System.out.println(((Monster)player.getTarget()).castBestSpell().toString());
 
                     } else {
                         throw new ArgumentActionException(ArgumentActionException.CaseAction.SPELL);
@@ -262,7 +270,10 @@ public class GameManager {
     private static Mover getNextTarget() {
         try {
             currentMonsterIndex++;
-            return lstMonsters.get(currentMonsterIndex);
+            Mover m = lstMonsters.get(currentMonsterIndex);
+            if(m.getClass().equals(Monster.class))
+                ((Monster)m).setTarget(player);
+            return m;
         }
         catch(IndexOutOfBoundsException end) {
             // Le jeu est fini : il a battu tous les monstres
