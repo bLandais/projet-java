@@ -9,6 +9,7 @@ import destiny.save.SavePlayer;
 import destiny.sorts.*;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,33 +18,45 @@ import java.util.Scanner;
  **/
 public class GameManager {
 
+
     private static boolean isGameFinished = false;
-
     private static Scanner scanner;
-    private static final int CODE_INVENTORY = 1;
-    private static final int CODE_SPELLS = 2;
     private static Player player;
+    private static ArrayList<Mover> lstMonsters;
+    private static int currentMonsterIndex;
 
+    /**
+     * Fonction d'appel du jeu
+     */
     public static void main(String[] args) {
         System.out.println("Bienvenue dans Destiny");
         scanner = new Scanner(System.in);
-        String name = askPlayerName();
-        player = new Player(name, 200, new ArrayList<Spell>());
-        player.setSorts(getDefaultSpellsList());
-        player.setInventory(getDefaultInventory());
-
         try {
-            SavePlayer.saveMover(player);
-            Mover playerSave = SavePlayer.lireMover();
-            if(playerSave == null)
+            Player player_temp = (Player)SavePlayer.lireMover();
+            if(player_temp == null)
                 throw new ImporterException();
+            else {
+                System.out.print("Sauvegarde trouvée, l'utiliser ? (y/n): ");
+                if(scanner.nextLine().equals("y"))
+                    player = player_temp;
+                else
+                    throw new ImporterException(); // start a new game
+            }
         }
         catch(ImporterException ex) {
             // Erreur lors de l'importation : on crée une nouvelle partie
+            String name = askPlayerName();
+            player = new Player(name, 200, new ArrayList<Spell>());
+            player.setSorts(getDefaultSpellsList());
+            player.setInventory(getDefaultInventory());
+            lstMonsters = getDefaultMonsters();
+            currentMonsterIndex = 0;
+            player.changeTarget(lstMonsters.get(currentMonsterIndex));
         }
-
-        manageGame();
-
+        finally {
+            lstMonsters = getDefaultMonsters();
+            manageGame();
+        }
     }
 
     /**
@@ -93,6 +106,23 @@ public class GameManager {
         return inventory;
     }
 
+    private static ArrayList<Mover> getDefaultMonsters() {
+        ArrayList<Mover> lstMonsters = new ArrayList<>();
+        lstMonsters.add(new Monster("Monster 1", 120, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 2", 140, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 3", 160, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 4", 180, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 5", 200, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 6", 220, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 7", 240, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 8", 260, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 9", 280, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 10", 300, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Monster 11", 320, getDefaultSpellsList(), false));
+        lstMonsters.add(new Monster("Boss final", 400, getDefaultSpellsList(), true));
+        return lstMonsters;
+    }
+
     /**
      * Affiche sur la console de l'inventaire (choix des items)
      */
@@ -118,12 +148,14 @@ public class GameManager {
      */
     private static void manageGame() {
         while (!isGameFinished) {
+            System.out.println(player.toString());
             showInventory();
             showActions();
 
             // On regarde quel action il veut faire
             manageActions();
         }
+        watchEndGame();
     }
 
     /**
@@ -192,6 +224,11 @@ public class GameManager {
                         actionFind = true;
                         // TODO : Vérifier le cooldown
                         player.castSpell(player.getSorts().get(actionId));
+                        // On vérifie si le monstre est mort...
+                        if(player.getTarget().getCurrentHP() == 0) {
+                            player.changeTarget(getNextTarget());
+                        }
+
                     } else {
                         throw new ArgumentActionException(ArgumentActionException.CaseAction.SPELL);
                     }
@@ -215,6 +252,23 @@ public class GameManager {
             System.out.println("------ GAME OVER ------");
             isGameFinished = true;
         }
+        else if(isGameFinished && player.getCurrentHP() > 0) // win
+        {
+            System.out.println("-------------------- Vous avez gagné !!!! --------------------");
+            isGameFinished = true;
+        }
+    }
+
+    private static Mover getNextTarget() {
+        try {
+            currentMonsterIndex++;
+            return lstMonsters.get(currentMonsterIndex);
+        }
+        catch(IndexOutOfBoundsException end) {
+            // Le jeu est fini : il a battu tous les monstres
+            isGameFinished = true;
+        }
+        return null;
     }
 
 }

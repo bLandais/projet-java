@@ -11,7 +11,7 @@ public class Soutiens extends Spell implements Serializable {
     /**
      * Constructeur de sort de soutiens
      * @param damageIncrease    Coefficient d'augmentation de dégats
-     */
+     **/
     public Soutiens(float damageIncrease) {
         this.damageIncrease = damageIncrease;
     }

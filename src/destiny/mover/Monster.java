@@ -9,7 +9,7 @@ import java.util.Random;
 public class Monster extends Mover implements Boss, Serializable {
     private boolean isBoss = false;
 
-    protected Monster(String name, int HP, ArrayList<Spell> spells, boolean isBoss) {
+    public Monster(String name, int HP, ArrayList<Spell> spells, boolean isBoss) {
         super(name, HP, spells);
         this.isBoss = isBoss;
     }
@@ -52,5 +52,10 @@ public class Monster extends Mover implements Boss, Serializable {
             this.setMaximumHP(300);
             this.setHP(300);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getClass().getSimpleName() + "] " + super.toString();
     }
 }

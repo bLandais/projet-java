@@ -1,7 +1,6 @@
 package destiny.sorts;
 
 import destiny.mover.Mover;
-
 import java.io.Serializable;
 
 /**

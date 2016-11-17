@@ -14,6 +14,10 @@ public class Item implements Serializable {
     }
 
     public void useItemOnMover(Mover mover) {
+        useItemOnMover(mover, this.itemEffect);
+    }
+
+    public void useItemOnMover(Mover mover, ItemEffect effect) {
         switch(itemEffect) {
             case FULL_HEAL:
                 this.quantity--;
@@ -28,6 +32,7 @@ public class Item implements Serializable {
             case RESET:
                 break;
             case SURPRISE:
+                useItemOnMover(mover, ItemEffect.values()[(int) (Math.random() * ItemEffect.values().length)]);
                 break;
             default:
                 break;

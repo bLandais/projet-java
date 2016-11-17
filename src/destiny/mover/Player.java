@@ -24,13 +24,21 @@ public class Player extends Mover implements Serializable {
     public void changeTarget(Mover target) {
         this.target = target;
     }
+    public Mover getTarget() { return this.target; }
 
     @Override
     public void castSpell(Spell spell) {
         ArrayList<Spell> lstSpells = super.getSorts();
         if(lstSpells.contains(spell)) {
-            spell.castOnTarget(); // TODO
+            spell.castOnTarget(target); // TODO
         }
     }
 
+    @Override
+    public String toString() {
+        if(target != null)
+            return "[" + getClass().getSimpleName() + "] " + super.toString() + " \nTarget : " + target.toString();
+        else
+            return "[" + getClass().getSimpleName() + "] " + super.toString();
+    }
 }

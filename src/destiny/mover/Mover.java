@@ -1,5 +1,6 @@
 package destiny.mover;
 
+import destiny.GameManager;
 import destiny.sorts.Spell;
 
 import java.io.Serializable;
@@ -61,8 +62,10 @@ public abstract class Mover implements Serializable {
         if(this.curHP <= 0)
             return; // Dead
         this.curHP -= Math.abs(hpDamage);
-        if(this.curHP < 0)
+        if(this.curHP < 0) {
             this.curHP = 0; // affichage
+            System.out.println(this.getName() + " a été tué");
+        }
     }
 
     protected void setHP(int HP) {
@@ -88,4 +91,8 @@ public abstract class Mover implements Serializable {
 
     public abstract void castSpell(Spell spell);
 
+    @Override
+    public String toString() {
+        return getName() + " --> HP: " + this.getCurrentHP() + "/" + this.getMaximumHP();
+    }
 }
