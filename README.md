@@ -60,7 +60,7 @@ Rendu de projet le 28 Novembre à 8h. Envoyer par mail le projet contenant:
     * Regénaration automatique : +20% des pdv max tous les 10 tours
 
 * **SORTS JOUEUR**:
-    * Attaque : Utilisable chaque tour ! Enleve 30PDV au monstre de base
+    * Attaque : Utilisable chaque tour ! Enleve 100PDV au monstre de base
     * Soin : Temps de recharge de 3 tours avant réutilisation
         * Effet : Soigne le joueur à hauteur de 20% de ses PDV max
 

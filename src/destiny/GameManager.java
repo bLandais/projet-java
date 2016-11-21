@@ -180,6 +180,8 @@ public class GameManager {
                             Item item = inventory.getItems().get(itemInput);
                             if (item.getQuantity() == 0)
                                 throw new InventoryException(InventoryException.ErrorType.EMPTY_ITEM);
+                            else
+                                item.useItemOnMover(player);
                         }
                     } else
                         throw new ArgumentActionException(ArgumentActionException.CaseAction.INVENTORY);
@@ -231,6 +233,9 @@ public class GameManager {
                         // On vérifie si le monstre est mort...
                         if(player.getTarget().getCurrentHP() == 0) {
                             player.changeTarget(getNextTarget());
+                            // On reset les potions
+                            player.setDefense(200);
+                            player.setDamageIncrease(1.0f);
                         }
                         System.out.println(player.toString());
                         System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");

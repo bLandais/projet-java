@@ -188,6 +188,7 @@ public abstract class Mover implements Serializable {
 
     @Override
     public String toString() {
-        return getName() + " --> HP: " + this.getCurrentHP() + "/" + this.getMaximumHP();
+        return getName() + "--> HP: " + this.getCurrentHP() + "/" + this.getMaximumHP() + "\t\t Defense: " + this.getDefense() + "\t\t Degats : "
+                + this.getDamageIncrease() * 100 + "%";
     }
 }

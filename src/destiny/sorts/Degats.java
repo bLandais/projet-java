@@ -1,6 +1,7 @@
 package destiny.sorts;
 
 import destiny.mover.Mover;
+import sun.awt.shell.ShellFolder;
 
 import java.io.Serializable;
 
@@ -22,6 +23,7 @@ public class Degats extends Spell implements Serializable {
         this.hpDamage = hpDamage;
     }
 
+    public void setHpDamage(int damage) { this.hpDamage = damage; }
     public int getHpDamage() {
         return hpDamage;
     }
@@ -34,13 +36,13 @@ public class Degats extends Spell implements Serializable {
     @Override
     public void castOnTarget(Mover mover) {
         super.castOnTarget(mover);
-        if(mover.getVulnerable()){
+        if(mover.getVulnerable()) {
             mover.damage(hpDamage);
         }
     }
 
     @Override
     public String toString() {
-        return "Degats -" + hpDamage + "hp - " + super.toString();
+        return "Degats -" + (int)(hpDamage) + "hp - " + super.toString();
     }
 }

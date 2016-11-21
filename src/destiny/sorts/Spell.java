@@ -30,6 +30,7 @@ public class Spell implements Serializable {
     public int getRechargeRound() {
         return this.rechargeRound;
     }
+    public void setCurrentRound(int currentRound) { this.currentRound = currentRound; }
 
     /**
      * Nombre de tours avant de pouvoir réutiliser le sort
@@ -49,8 +50,9 @@ public class Spell implements Serializable {
 
     public void castOnTarget(Mover mover) {
         // TODO
-        if (rechargeRound == 0) {
+        if (rechargeRound == 0 || rechargeRound == currentRound) {
             // Spell peut être lancé directement
+            currentRound = 0;
         } else {
             if (currentRound < rechargeRound) {
                 // Ne peut PAS être lancé !
