@@ -1,6 +1,5 @@
 package destiny.mover;
 
-import destiny.GameManager;
 import destiny.sorts.Spell;
 
 import java.io.Serializable;
@@ -184,7 +183,7 @@ public abstract class Mover implements Serializable {
      *
      * @param spell le sort qui va être lancé
      */
-    public abstract void castSpell(Spell spell);
+    public abstract boolean castSpell(Spell spell);
 
     @Override
     public String toString() {

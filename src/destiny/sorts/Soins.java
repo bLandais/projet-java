@@ -23,8 +23,9 @@ public class Soins extends Spell implements Serializable {
      * Lance le sort courant sur la cible en cours
      **/
     @Override
-    public void castOnTarget() {
+    public boolean castOnTarget() {
         castOnTarget(getTarget());
+        return false;
     }
 
     /**
@@ -32,9 +33,11 @@ public class Soins extends Spell implements Serializable {
      * @param mover     Mover (monstre, player) sur lequel sera lancé le sort
      **/
     @Override
-    public void castOnTarget(Mover mover) {
-        super.castOnTarget(mover);
-        mover.heal(hpHeal);
+    public boolean castOnTarget(Mover mover) {
+        boolean canCast = super.castOnTarget(mover);
+        if (canCast)
+            mover.heal(hpHeal);
+        return canCast;
     }
 
     /**

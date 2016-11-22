@@ -1,7 +1,8 @@
 package destiny.sorts;
 
+import destiny.GameManager;
+import destiny.mover.Monster;
 import destiny.mover.Mover;
-import sun.awt.shell.ShellFolder;
 
 import java.io.Serializable;
 
@@ -20,7 +21,7 @@ public class Degats extends Spell implements Serializable {
      */
     public Degats(int hpDamage, int rechargeRound) {
         super.setRechargeRound(rechargeRound);
-        this.hpDamage = hpDamage;
+        this.hpDamage = (int) (hpDamage * GameManager.player.getDamageIncrease());
     }
 
     public void setHpDamage(int damage) { this.hpDamage = damage; }
@@ -29,20 +30,25 @@ public class Degats extends Spell implements Serializable {
     }
 
     @Override
-    public void castOnTarget() {
-        castOnTarget(getTarget());
+    public boolean castOnTarget() {
+        return castOnTarget(getTarget());
     }
 
     @Override
-    public void castOnTarget(Mover mover) {
-        super.castOnTarget(mover);
-        if(mover.getVulnerable()) {
-            mover.damage(hpDamage);
+    public boolean castOnTarget(Mover mover) {
+        boolean canCast = super.castOnTarget(mover);
+        if(mover.getVulnerable() && canCast) {
+            // Le monstre n'a pas de damage increase
+            if(mover instanceof Monster)
+                mover.damage((int) (hpDamage * GameManager.player.getDamageIncrease()));
+            else
+                mover.damage(hpDamage);
         }
+        return false;
     }
 
     @Override
     public String toString() {
-        return "Degats -" + (int)(hpDamage) + "hp - " + super.toString();
+        return "Degats -" + (int)(hpDamage * GameManager.player.getDamageIncrease()) + "hp - " + super.toString();
     }
 }

@@ -1,5 +1,6 @@
 package destiny.inventory;
 
+import destiny.GameManager;
 import destiny.mover.Mover;
 import destiny.mover.Player;
 import destiny.sorts.Degats;
@@ -37,15 +38,11 @@ public class Item implements Serializable {
                 break;
             case ATTACK:
                 this.quantity--;
-                // TODO : Corriger car l'effet de l'item d'attaque ne change pas les damage
-                for(Spell spell : (((Player)mover).getSortsDegat())) {
-                    mover.setDamageIncrease(mover.getDamageIncrease() * 1.5f);
-                    ((Degats) spell).setHpDamage(((Degats)spell).getHpDamage() * (int)mover.getDamageIncrease());
-                }
+                GameManager.player.setDamageIncrease(mover.getDamageIncrease() * 1.5f);
                 break;
             case RESET:
                 for(Spell spell : mover.getSorts()) {
-                    spell.setCurrentRound(spell.getRechargeRound()); // le sort est prêt a être lancé !
+                    spell.setRechargeRound(spell.getRechargeRound()); // le sort est prêt a être lancé !
                 }
                 break;
             case SURPRISE:

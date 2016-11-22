@@ -5,7 +5,6 @@ import destiny.sorts.Degats;
 import destiny.sorts.Spell;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +14,9 @@ public class Player extends Mover implements Serializable {
 
     private Inventory inventory;
     private Mover target;
+
+    private int currentMonsterIndex;
+
 
     /**
      * Instantiates a new Player.
@@ -61,14 +63,16 @@ public class Player extends Mover implements Serializable {
     public Mover getTarget() { return this.target; }
 
     @Override
-    public void castSpell(Spell spell) {
+    public boolean castSpell(Spell spell) {
+        boolean canCast = true;
         ArrayList<Spell> lstSpells = super.getSorts();
         if(lstSpells.contains(spell)) {
             if(spell.getTarget() == null)
-                spell.castOnTarget(target); // TODO
+                canCast = spell.castOnTarget(target); // TODO
             else
-                spell.castOnTarget(spell.getTarget());
+                canCast = spell.castOnTarget(spell.getTarget());
         }
+        return canCast;
     }
 
     @Override
@@ -91,6 +95,22 @@ public class Player extends Mover implements Serializable {
             }
         }
         return spells;
+    }
+
+    /**
+     * Cette fonction permet d'augmenter l'indice du monstre sur lequel on combat
+     * pour passer au monstre suivant.
+     */
+    public void increaseMonsterIndex() {
+        this.currentMonsterIndex++;
+    }
+
+    public void setCurrentMonsterIndex(int currentMonsterIndex) {
+        this.currentMonsterIndex = currentMonsterIndex;
+    }
+
+    public int getCurrentMonsterIndex() {
+        return this.currentMonsterIndex;
     }
 
 }

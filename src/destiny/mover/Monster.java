@@ -1,6 +1,5 @@
 package destiny.mover;
 
-import destiny.GameManager;
 import destiny.sorts.Degats;
 import destiny.sorts.Soins;
 import destiny.sorts.Spell;
@@ -56,12 +55,15 @@ public class Monster extends Mover implements Boss, Serializable {
             getSoinsSpell().castOnTarget(this);
             return getSoinsSpell();
         }
-        return null;
+        else {
+            getDamageSpell().castOnTarget(target);
+            return getDamageSpell(); // Par défaut : il lance un damage quand même !
+        }
     }
 
     private Degats getDamageSpell() {
         for(Spell s : spells) {
-            if(s.getClass().getName().equals(Degats.class.getName()))
+            if(s instanceof Degats)
                 return (Degats)s;
         }
         return null;
@@ -76,14 +78,15 @@ public class Monster extends Mover implements Boss, Serializable {
     }
 
     @Override
-    public void castSpell(Spell spell) {
-        // Only cast damage spells TODO : Sure about that ?
+    public boolean castSpell(Spell spell) {
+        boolean canCast = true;
         ArrayList<Spell> spells = this.getSorts();
         Mover closestMover = spell.getTarget();
         int nbSpells = spells.size();
         Spell randomSpellChoose = spells.get(new Random().nextInt(nbSpells));
         if(randomSpellChoose != null)
-            randomSpellChoose.castOnTarget();
+            canCast = randomSpellChoose.castOnTarget();
+        return canCast;
     }
 
     @Override

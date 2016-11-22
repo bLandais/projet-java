@@ -20,18 +20,20 @@ public class Soutiens extends Spell implements Serializable {
      * Lance le sort courant sur la cible courante
      */
     @Override
-    public void castOnTarget() {
+    public boolean castOnTarget() {
         castOnTarget(target);
+        return false;
     }
 
     @Override
-    public void castOnTarget(Mover mover) {
-        super.castOnTarget(mover);
-        if(mover != null) {
+    public boolean castOnTarget(Mover mover) {
+        boolean canCast = super.castOnTarget(mover);
+        if(mover != null && canCast) {
             if (mover.getCurrentHP() > 0) { // is mover alive ?
                 mover.setDamageIncrease(damageIncrease);
             }
         }
+        return false;
     }
 
     @Override

@@ -20,9 +20,8 @@ public class GameManager {
 
     private static boolean isGameFinished = false;
     private static Scanner scanner;
-    private static Player player;
+    public static Player player;
     private static ArrayList<Mover> lstMonsters;
-    private static int currentMonsterIndex;
 
     /**
      * Fonction d'appel du jeu
@@ -49,8 +48,8 @@ public class GameManager {
             player.setSorts(getDefaultSpellsList());
             player.setInventory(getDefaultInventory());
             lstMonsters = getDefaultMonsters();
-            currentMonsterIndex = 0;
-            player.changeTarget(lstMonsters.get(currentMonsterIndex));
+            player.setCurrentMonsterIndex(0);
+            player.changeTarget(lstMonsters.get(player.getCurrentMonsterIndex()));
             ((Monster)player.getTarget()).setTarget(player);
         }
         finally {
@@ -228,20 +227,23 @@ public class GameManager {
                     int actionId = Integer.parseInt(inputAction);
                     if (actionId >= 0 && actionId <= player.getSorts().size()) {
                         actionFind = true;
-                        // TODO : Vérifier le cooldown
-                        player.castSpell(player.getSorts().get(actionId));
-                        // On vérifie si le monstre est mort...
-                        if(player.getTarget().getCurrentHP() == 0) {
-                            player.changeTarget(getNextTarget());
-                            // On reset les potions
-                            player.setDefense(200);
-                            player.setDamageIncrease(1.0f);
+                        boolean canCastSpell = player.castSpell(player.getSorts().get(actionId));
+                        if(canCastSpell) {
+                            // On vérifie si le monstre est mort...
+                            if (player.getTarget().getCurrentHP() != 0) {
+                                // Tour du monstre
+                                Spell.increaseRecharge();
+                                System.out.println(player.toString());
+                                System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");
+                                if (player.getTarget().getClass().equals(Monster.class))
+                                    System.out.println(((Monster) player.getTarget()).castBestSpell().toString());
+                            } else {  // Si le monstre vient de mourir, on attend le tour suivant pour lancer l'IA
+                                // On reset les potions
+                                player.setDefense(200);
+                                player.setDamageIncrease(1.0f);
+                                player.changeTarget(getNextTarget());
+                            }
                         }
-                        System.out.println(player.toString());
-                        System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");
-                        if(player.getTarget().getClass().equals(Monster.class))
-                            System.out.println(((Monster)player.getTarget()).castBestSpell().toString());
-
                     } else {
                         throw new ArgumentActionException(ArgumentActionException.CaseAction.SPELL);
                     }
@@ -274,9 +276,9 @@ public class GameManager {
 
     private static Mover getNextTarget() {
         try {
-            currentMonsterIndex++;
-            Mover m = lstMonsters.get(currentMonsterIndex);
-            if(m.getClass().equals(Monster.class))
+            player.increaseMonsterIndex();
+            Mover m = lstMonsters.get(player.getCurrentMonsterIndex());
+            if(m instanceof  Monster)
                 ((Monster)m).setTarget(player);
             return m;
         }
