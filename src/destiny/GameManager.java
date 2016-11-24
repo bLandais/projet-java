@@ -176,7 +176,7 @@ public class GameManager {
                         if (inventory.getItems().get(itemInput) != null) {
                             itemFind = true;
                             Item item = inventory.getItems().get(itemInput);
-                            if (item.getQuantity() == 0)
+                            if (item.getQuantity() <= 0)
                                 throw new InventoryException(InventoryException.ErrorType.EMPTY_ITEM);
                             else
                                 item.useItemOnMover(player);
@@ -228,10 +228,10 @@ public class GameManager {
                         actionFind = true;
                         boolean canCastSpell = player.castSpell(player.getSorts().get(actionId));
                         if(canCastSpell) {
+                            Spell.increaseRecharge(player);
                             // On vérifie si le monstre est mort...
                             if (player.getTarget().getCurrentHP() != 0) {
                                 // Tour du monstre
-                                Spell.increaseRecharge(player);
                                 System.out.println(player.toString());
                                 System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");
                                 if (player.getTarget().getClass().equals(Monster.class)) {

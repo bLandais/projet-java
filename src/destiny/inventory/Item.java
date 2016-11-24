@@ -17,6 +17,14 @@ public class Item implements Serializable {
         this.quantity = quantity;
     }
 
+    private void decreaseQuantity() {
+        if(quantity >= 1) {
+            this.quantity--;
+        }
+        else
+            this.quantity =0;
+    }
+
     public void useItemOnMover(Mover mover) {
         useItemOnMover(mover, this.itemEffect);
     }
@@ -27,27 +35,27 @@ public class Item implements Serializable {
      * @param effect
      */
     public void useItemOnMover(Mover mover, ItemEffect effect) {
+        decreaseQuantity();
         switch(effect) {
             case FULL_HEAL:
-                this.quantity--;
                 mover.heal(mover.getMaximumHP() - mover.getCurrentHP());
+                System.out.println("Utilisation de l'objet de soins : HP max");
                 break;
             case DEFENSE_INCREASE: // TODO
-                this.quantity--;
                 mover.setDefense(mover.getDefense() + 50);
+                System.out.println("Utilisation de l'objet de défense");
                 break;
             case ATTACK:
-                this.quantity--;
                 GameManager.player.setDamageIncrease(mover.getDamageIncrease() * 1.5f);
+                System.out.println("Utilisation de l'objet des dégats * 1.5");
                 break;
             case RESET:
-                this.quantity--;
                 for(Spell spell : mover.getSorts()) {
-                    spell.setRechargeRound(spell.getRechargeRound()); // le sort est prêt a être lancé !
+                    spell.setCurrentRound(spell.getRechargeRound()); // le sort est prêt a être lancé !
                 }
+                System.out.println("Utilisation de l'objet de remise à zéro");
                 break;
             case SURPRISE:
-                this.quantity--;
                 useItemOnMover(mover, ItemEffect.values()[(int) (Math.random() * ItemEffect.values().length)]);
                 break;
             default:
