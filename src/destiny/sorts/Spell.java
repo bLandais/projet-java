@@ -9,14 +9,34 @@ import java.io.Serializable;
  */
 public class Spell implements Serializable {
 
+    /**
+     * The Percent critic.
+     */
     protected float percentCritic = 0.2f; // Default
     private int rechargeRound = 0; // Minimum round before re-use the spell
+    /**
+     * The Current round.
+     */
     protected int currentRound = 0; // Actual round counter
+    /**
+     * The Target.
+     */
     protected Mover target;
 
+    /**
+     * Sets target.
+     *
+     * @param mover the mover
+     */
     protected void setTarget(Mover mover) {
         this.target = mover;
     }
+
+    /**
+     * Gets target.
+     *
+     * @return the target
+     */
     public Mover getTarget() {
         return target;
     }
@@ -25,19 +45,44 @@ public class Spell implements Serializable {
      * Fonction qui est appelée lorsqu'un tour est passé
      * et qui incrémente le temps de recharge de tous les sorts.
      */
-    public static void increaseRecharge() {
-        for(Spell s : GameManager.player.getSorts()) {
-            s.increaseCurrentRound();
+    public static void increaseRecharge(Mover mover) {
+        if(mover != null) {
+            for (Spell s : mover.getSorts()) {
+                s.increaseCurrentRound();
+            }
         }
     }
 
+    public boolean canCastSpell() {
+        if(currentRound < rechargeRound)
+            return false;
+        else
+            return false;
+    }
+
+    /**
+     * Gets percent critic.
+     *
+     * @return the percent critic
+     */
     public float getPercentCritic() {
         return this.percentCritic;
     }
+
+    /**
+     * Sets percent critic.
+     *
+     * @param percentCritic the percent critic
+     */
     public void setPercentCritic(float percentCritic) {
         this.percentCritic = percentCritic;
     }
 
+    /**
+     * Gets recharge round.
+     *
+     * @return the recharge round
+     */
     public int getRechargeRound() {
         return this.rechargeRound;
     }
@@ -49,9 +94,14 @@ public class Spell implements Serializable {
         this.setCurrentRound(currentRound + 1);
     }
 
+    /**
+     * Sets current round
+     *
+     * @param currentRound the current round
+     */
     public void setCurrentRound(int currentRound) {
         if (currentRound > this.rechargeRound)
-            currentRound = 0;
+            currentRound = rechargeRound;
 
         this.currentRound = currentRound;
     }
@@ -59,7 +109,8 @@ public class Spell implements Serializable {
     /**
      * Nombre de tours avant de pouvoir réutiliser le sort
      * Si le sort est toujours utilisable, recharge est à zéro.
-     * @param rechargeRound     Nombre de tours avant recharge
+     *
+     * @param rechargeRound Nombre de tours avant recharge
      */
     public void setRechargeRound(int rechargeRound) {
         if(rechargeRound < 0)
@@ -68,6 +119,11 @@ public class Spell implements Serializable {
             this.rechargeRound = rechargeRound;
     }
 
+    /**
+     * Cast on target boolean.
+     *
+     * @return the boolean
+     */
     public boolean castOnTarget() {
         castOnTarget(target);
         return false;
@@ -75,8 +131,9 @@ public class Spell implements Serializable {
 
     /**
      * Fonction qui permet de gérer le cooldown avant le lancement
-     * @param mover     Mover qui sera la cible
-     * @return  Boolean : True s'il peut lancer le sort (cooldown ok), false sinon
+     *
+     * @param mover Mover qui sera la cible
+     * @return Boolean : True s'il peut lancer le sort (cooldown ok), false sinon
      */
     public boolean castOnTarget(Mover mover) {
         if (rechargeRound == 0 || rechargeRound == currentRound) {

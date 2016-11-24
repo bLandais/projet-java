@@ -4,14 +4,18 @@ import destiny.mover.Mover;
 
 import java.io.Serializable;
 
+/**
+ * The type Soutiens.
+ */
 public class Soutiens extends Spell implements Serializable {
 
     private float damageIncrease;
 
     /**
      * Constructeur de sort de soutiens
-     * @param damageIncrease    Coefficient d'augmentation de dégats
-     **/
+     *
+     * @param damageIncrease Coefficient d'augmentation de dégats
+     */
     public Soutiens(float damageIncrease) {
         this.damageIncrease = damageIncrease;
     }

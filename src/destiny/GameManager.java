@@ -161,7 +161,6 @@ public class GameManager {
      * Permet de gérer l'entrée utilisateur sur le choix d'un item
      */
     private static void manageInventory() {
-        // TODO
         player.getInventory().showInventory();
         boolean itemFind = false;
         while(!itemFind) {
@@ -232,11 +231,12 @@ public class GameManager {
                             // On vérifie si le monstre est mort...
                             if (player.getTarget().getCurrentHP() != 0) {
                                 // Tour du monstre
-                                Spell.increaseRecharge();
+                                Spell.increaseRecharge(player);
                                 System.out.println(player.toString());
                                 System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");
-                                if (player.getTarget().getClass().equals(Monster.class))
+                                if (player.getTarget().getClass().equals(Monster.class)) {
                                     System.out.println(((Monster) player.getTarget()).castBestSpell().toString());
+                                }
                             } else {  // Si le monstre vient de mourir, on attend le tour suivant pour lancer l'IA
                                 // On reset les potions
                                 player.setDefense(200);

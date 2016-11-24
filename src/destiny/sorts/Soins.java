@@ -4,14 +4,18 @@ import destiny.mover.Mover;
 
 import java.io.Serializable;
 
+/**
+ * The type Soins.
+ */
 public class Soins extends Spell implements Serializable {
 
     private int hpHeal;
 
     /**
      * Constructeur du sort de Soin
-     * @param player    La cible du sort (le joueur pour le sort de soin)
-     * @param rechargeRound  Temps avant de pouvoir reutiliser le sort
+     *
+     * @param player        La cible du sort (le joueur pour le sort de soin)
+     * @param rechargeRound Temps avant de pouvoir reutiliser le sort
      */
     public Soins(Mover player, int rechargeRound) {
         super.setRechargeRound(rechargeRound);
@@ -24,8 +28,7 @@ public class Soins extends Spell implements Serializable {
      **/
     @Override
     public boolean castOnTarget() {
-        castOnTarget(getTarget());
-        return false;
+        return castOnTarget(getTarget());
     }
 
     /**

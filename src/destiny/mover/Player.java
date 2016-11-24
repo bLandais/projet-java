@@ -68,7 +68,7 @@ public class Player extends Mover implements Serializable {
         ArrayList<Spell> lstSpells = super.getSorts();
         if(lstSpells.contains(spell)) {
             if(spell.getTarget() == null)
-                canCast = spell.castOnTarget(target); // TODO
+                canCast = spell.castOnTarget(target);
             else
                 canCast = spell.castOnTarget(spell.getTarget());
         }

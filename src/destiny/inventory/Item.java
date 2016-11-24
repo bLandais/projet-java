@@ -41,11 +41,13 @@ public class Item implements Serializable {
                 GameManager.player.setDamageIncrease(mover.getDamageIncrease() * 1.5f);
                 break;
             case RESET:
+                this.quantity--;
                 for(Spell spell : mover.getSorts()) {
                     spell.setRechargeRound(spell.getRechargeRound()); // le sort est prêt a être lancé !
                 }
                 break;
             case SURPRISE:
+                this.quantity--;
                 useItemOnMover(mover, ItemEffect.values()[(int) (Math.random() * ItemEffect.values().length)]);
                 break;
             default:

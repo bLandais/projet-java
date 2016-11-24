@@ -44,9 +44,13 @@ public class Degats extends Spell implements Serializable {
             else
                 mover.damage(hpDamage);
         }
-        return false;
+        return canCast;
     }
 
+    /**
+     * Fonction qui retoure une version lisible de l'objet Degats
+     * @return String de la forme Degets - x hp - ...
+     */
     @Override
     public String toString() {
         return "Degats -" + (int)(hpDamage * GameManager.player.getDamageIncrease()) + "hp - " + super.toString();

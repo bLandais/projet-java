@@ -52,8 +52,15 @@ public class Monster extends Mover implements Boss, Serializable {
             return getDamageSpell();
         }
         else if(this.getCurrentHP() < 100) { // le joueur pourrait le tuer directement
-            getSoinsSpell().castOnTarget(this);
-            return getSoinsSpell();
+            if(getSoinsSpell().canCastSpell()) {
+                getSoinsSpell().castOnTarget(this);
+                Spell.increaseRecharge(this);
+                return getSoinsSpell();
+            }
+            else {  // si le sort n'est malheureusement pas dispo...
+                getDamageSpell().castOnTarget(target);
+                return getDamageSpell();
+            }
         }
         else {
             getDamageSpell().castOnTarget(target);

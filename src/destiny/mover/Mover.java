@@ -75,7 +75,7 @@ public abstract class Mover implements Serializable {
         this.curHP = HP;
         this.spells = spells;
         this.isVulnerable = true;
-        this.defense = 200; // TODO : Default ?
+        this.defense = 200; // Default
         this.damageIncrease = 1.0f;
     }
 

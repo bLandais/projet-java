@@ -27,7 +27,7 @@ public class SavePlayer {
      * @return L'objet lu depuis le fichier de sauvegarde (ou null en cas d'erreur)
      */
     public static Mover lireMover() throws ImporterException {
-        ObjectInputStream ois;
+        ObjectInputStream ois = null;
         try {
             ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("save.txt"))));
             Mover moverSave = (Mover) ois.readObject();
@@ -37,6 +37,13 @@ public class SavePlayer {
             throw new ImporterException();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        finally {
+				try {
+					ois.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
         }
         return null;
     }
