@@ -5,6 +5,7 @@ import destiny.inventory.Inventory;
 import destiny.inventory.Item;
 import destiny.inventory.ItemEffect;
 import destiny.mover.*;
+import destiny.save.DefaultValues;
 import destiny.save.SavePlayer;
 import destiny.sorts.*;
 
@@ -47,7 +48,7 @@ public class GameManager {
             player = new Player(name, 200, new ArrayList<Spell>());
             player.setSorts(getDefaultSpellsList());
             player.setInventory(getDefaultInventory());
-            lstMonsters = getDefaultMonsters();
+            lstMonsters = DefaultValues.getMonstersListFile();
             player.setCurrentMonsterIndex(0);
             player.changeTarget(lstMonsters.get(player.getCurrentMonsterIndex()));
             ((Monster)player.getTarget()).setTarget(player);
@@ -80,7 +81,7 @@ public class GameManager {
      *      Soins    -> 50 de soins
      *      Soutiens -> 10% d'augmentation
      */
-    private static ArrayList<Spell> getDefaultSpellsList() {
+    public static ArrayList<Spell> getDefaultSpellsList() {
         ArrayList<Spell> lstSpells = new ArrayList<>();
 
         lstSpells.add(new Degats(100, 0));

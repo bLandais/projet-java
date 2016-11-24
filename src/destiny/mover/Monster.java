@@ -1,5 +1,6 @@
 package destiny.mover;
 
+import destiny.GameManager;
 import destiny.sorts.Degats;
 import destiny.sorts.Soins;
 import destiny.sorts.Spell;
