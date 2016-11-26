@@ -40,7 +40,8 @@ public class SavePlayer {
         }
         finally {
 				try {
-					ois.close();
+                    if(ois != null)
+    					ois.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
