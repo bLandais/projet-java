@@ -37,7 +37,7 @@ public class Soutiens extends Spell implements Serializable {
                 mover.setDamageIncrease(damageIncrease);
             }
         }
-        return false;
+        return canCast;
     }
 
     @Override

@@ -40,32 +40,47 @@ public class Monster extends Mover implements Boss, Serializable {
 
     /**
      * Mini intelligence artificielle
-     * @return  Le sort que le monstre a lancé (pour l'affichage)
+     * @return  Le sort que le monstre a lancé (pour l'affichage) au format String
      */
-    public Spell castBestSpell() {
+    public String castBestSpell() {
+        if(!this.getVulnerable())
+            this.setVulnerable(true);
         if(getCurrentHP() == getMaximumHP()) {
             getDamageSpell().castOnTarget(target);
-            return getDamageSpell();
+            return getDamageSpell().toString();
         }
         // S'il peut achever le joueur
         if(target.getCurrentHP() < getDamageSpell().getHpDamage()) {
             getDamageSpell().castOnTarget(target); // on lance sur le joueur
-            return getDamageSpell();
+            return getDamageSpell().toString();
         }
         else if(this.getCurrentHP() < 100) { // le joueur pourrait le tuer directement
-            if(getSoinsSpell().canCastSpell()) {
+            if (getSoinsSpell().canCastSpell() && !this.isBoss) { // il ne peut pas et  ce n'est pas un boss
                 getSoinsSpell().castOnTarget(this);
                 Spell.increaseRecharge(this);
-                return getSoinsSpell();
+                return getSoinsSpell().toString();
+            }
+            else if (getSoinsSpell().canCastSpell() && this.isBoss) {
+                // aléatoirement, on selectionne parmi les sorts de boss
+                int randint = new Random().nextInt(3);
+                switch(randint) {
+                    case 0:
+                        return this.regeneration();
+                    case 1:
+                        return this.increaseHP();
+                    case 2:
+                        return this.invulnerability();
+                }
+                return this.regeneration();
             }
             else {  // si le sort n'est malheureusement pas dispo...
                 getDamageSpell().castOnTarget(target);
-                return getDamageSpell();
+                return getDamageSpell().toString();
             }
         }
         else {
             getDamageSpell().castOnTarget(target);
-            return getDamageSpell(); // Par défaut : il lance un damage quand même !
+            return getDamageSpell().toString(); // Par défaut : il lance un damage quand même !
         }
     }
 
@@ -98,36 +113,49 @@ public class Monster extends Mover implements Boss, Serializable {
     }
 
     @Override
-    public void regeneration() {
-        if(this.isBoss)
-            super.heal(this.getCurrentHP() / (1+new Random().nextInt(2)));
+    public String regeneration() {
+        if(this.isBoss) {
+            int hpheal = this.getCurrentHP() / (1 + new Random().nextInt(2));
+            super.heal(hpheal);
+            return "Le boss se régènere " + hpheal + " hp";
+        }
+        return null;
     }
 
     @Override
-    public void defenseIncrease() {
+    public String defenseIncrease() {
         if(this.isBoss){
             int curDefense = this.getDefense();
             this.setDefense((int)(1.3*curDefense));
+            return "Le boss a une défense augmenté de 30%";
         }
+        return "";
     }
 
     @Override
-    public void invulnerability() {
+    public String invulnerability() {
         if (this.isBoss) {
             this.setVulnerable(false);
+            return "Le monstre est invulnérable pour ce tour";
         }
+        return "";
     }
 
     @Override
-    public void increaseHP() {
+    public String increaseHP() {
         if(this.isBoss) {
-            this.setMaximumHP(300);
-            this.setHP(300);
+            this.setMaximumHP(this.getMaximumHP() + 150);
+            this.setHP(this.getMaximumHP());
+            return "Les HP du monstre sont augmentés de 150 hp";
         }
+        return "";
     }
 
     @Override
     public String toString() {
-        return "[" + getClass().getSimpleName() + "] " + super.toString();
+        String boss = "";
+        if(this.isBoss)
+            boss = " *** BOSS *** ";
+        return "[" + getClass().getSimpleName() + "] " + boss +  super.toString();
     }
 }

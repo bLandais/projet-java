@@ -236,7 +236,7 @@ public class GameManager {
                                 System.out.println(player.toString());
                                 System.out.print("\t\t\t---- Tour du Monstre ==> Il lance ");
                                 if (player.getTarget().getClass().equals(Monster.class)) {
-                                    System.out.println(((Monster) player.getTarget()).castBestSpell().toString());
+                                    System.out.println(((Monster) player.getTarget()).castBestSpell());
                                 }
                             } else {  // Si le monstre vient de mourir, on attend le tour suivant pour lancer l'IA
                                 // On reset les potions
