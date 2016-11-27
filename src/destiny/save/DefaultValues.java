@@ -16,7 +16,6 @@ public class DefaultValues {
             File file = new File("monstres_values.txt");
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            StringBuffer stringBuffer = new StringBuffer();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if(line.startsWith("#"))

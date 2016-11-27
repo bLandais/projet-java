@@ -14,9 +14,11 @@ public class Soutiens extends Spell implements Serializable {
     /**
      * Constructeur de sort de soutiens
      *
-     * @param damageIncrease Coefficient d'augmentation de dégats
+     * @param   target La cible sur lequel sera lancé le sort
+     *          damageIncrease Coefficient d'augmentation de dégats
      */
-    public Soutiens(float damageIncrease) {
+    public Soutiens(Mover target, float damageIncrease) {
+        super.setTarget(target);
         this.damageIncrease = damageIncrease;
     }
 
@@ -34,7 +36,7 @@ public class Soutiens extends Spell implements Serializable {
         boolean canCast = super.castOnTarget(mover);
         if(mover != null && canCast) {
             if (mover.getCurrentHP() > 0) { // is mover alive ?
-                mover.setDamageIncrease(damageIncrease);
+                mover.setDamageIncrease(mover.getDamageIncrease() * damageIncrease);
             }
         }
         return canCast;
