@@ -1,5 +1,6 @@
 package destiny.mover;
 
+import destiny.sorts.Degats;
 import destiny.sorts.Spell;
 
 import java.io.Serializable;
@@ -60,6 +61,9 @@ public abstract class Mover implements Serializable {
      */
     public void setDamageIncrease(float damageIncrease) {
         this.damageIncrease = damageIncrease;
+        for(Spell s : getSorts())
+            if(s instanceof Degats)
+                ((Degats) s).setHpDamage((int)(100 * damageIncrease));
     }
 
     /**
@@ -117,10 +121,8 @@ public abstract class Mover implements Serializable {
      * @param hpDamage the hp damage
      */
     public void damage(int hpDamage) {
-        if(this.curHP <= 0)
-            return; // Dead
         this.curHP -= Math.abs(hpDamage);
-        if(this.curHP < 0) {
+        if(this.curHP <= 0) { // il est mort
             this.curHP = 0; // affichage
             System.out.println(this.getName() + " a été tué");
         }
