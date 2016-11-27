@@ -120,13 +120,14 @@ public class Spell implements Serializable {
     }
 
     /**
-     * Cast on target boolean.
+     * Lance sur la cible courante du sort
      *
-     * @return the boolean
+     * @return True si le sort peut être lancé
      */
     public boolean castOnTarget() {
-        castOnTarget(target);
-        return false;
+        if (target == null)
+            return false;
+        return castOnTarget(target);
     }
 
     /**
