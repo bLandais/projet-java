@@ -1,10 +1,10 @@
 #Type		Nom		HP	Boss ?
-MONSTER		Monster 1	120	false
-MONSTER		Monster 2	140	false
-MONSTER		Monster 3	160	false
-MONSTER		Monster 4	180	false
-MONSTER		Monster 5	200	false
-MONSTER		Monster 6	220	false
+MONSTER		Monster 1	120	true
+MONSTER		Monster 2	140	true
+MONSTER		Monster 3	160	true
+MONSTER		Monster 4	180	true
+MONSTER		Monster 5	200	true
+MONSTER		Monster 6	220	truee
 MONSTER		Monster 7	240	false
 MONSTER		Monster 8	260	false
 MONSTER		Monster 9	280	false
