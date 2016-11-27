@@ -17,7 +17,7 @@ public class Monster extends Mover implements Boss, Serializable {
     private Mover target;
 
     /**
-     * Instantiates a new Monster.
+     * Constructeur de Monster.
      *
      * @param name   son nom
      * @param HP     nombre de points de vie
@@ -32,6 +32,7 @@ public class Monster extends Mover implements Boss, Serializable {
 
     /**
      * Quand le joueur change de cible, le monstre change aussi de cible pour que ce soit le joueur
+     *
      * @param mover Cible
      */
     public void setTarget(Mover mover) {
@@ -40,7 +41,8 @@ public class Monster extends Mover implements Boss, Serializable {
 
     /**
      * Mini intelligence artificielle
-     * @return  Le sort que le monstre a lancé (pour l'affichage) au format String
+     *
+     * @return Le sort que le monstre a lancé (pour l'affichage) au format String
      */
     public String castBestSpell() {
         if(!this.getVulnerable())

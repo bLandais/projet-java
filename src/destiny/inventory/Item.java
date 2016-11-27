@@ -8,15 +8,27 @@ import destiny.sorts.Spell;
 
 import java.io.Serializable;
 
+/**
+ * The type Item.
+ */
 public class Item implements Serializable {
     private final ItemEffect itemEffect;
     private int quantity;
 
+    /**
+     * Instantiates a new Item.
+     *
+     * @param effect   the effect
+     * @param quantity the quantity
+     */
     public Item(ItemEffect effect, int quantity) {
         this.itemEffect = effect;
         this.quantity = quantity;
     }
 
+    /**
+     * La quantité est décrémentée de 1.
+     */
     private void decreaseQuantity() {
         if(quantity >= 1) {
             this.quantity--;
@@ -25,14 +37,20 @@ public class Item implements Serializable {
             this.quantity =0;
     }
 
+    /**
+     * Use item on mover.
+     *
+     * @param mover le mover sur lequel l'item sera utilisé
+     */
     public void useItemOnMover(Mover mover) {
         useItemOnMover(mover, this.itemEffect);
     }
 
     /**
+     * Use item on mover.
      *
-     * @param mover Mover qui va subir l'effet de l'item
-     * @param effect
+     * @param mover  Mover qui va subir l'effet de l'item
+     * @param effect the effect
      */
     public void useItemOnMover(Mover mover, ItemEffect effect) {
         decreaseQuantity();
@@ -68,6 +86,17 @@ public class Item implements Serializable {
         return "Item : " + itemEffect + " - Reste : " + quantity;
     }
 
+    /**
+     * Gets quantity.
+     *
+     * @return the quantity
+     */
     public int getQuantity() { return this.quantity;}
+
+    /**
+     * Add quantity.
+     *
+     * @param quantity the quantity
+     */
     public void addQuantity(int quantity) { this.quantity += quantity; }
 }

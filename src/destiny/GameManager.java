@@ -86,7 +86,7 @@ public class GameManager {
 
         lstSpells.add(new Degats(100, 0));
         lstSpells.add(new Soins(player, 3));
-        lstSpells.add(new Soutiens(player, 1.10f));
+        lstSpells.add(new Soutiens(player, 1.40f));
 
         return lstSpells;
     }

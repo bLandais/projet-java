@@ -8,8 +8,16 @@ import java.util.ArrayList;
 
 import static destiny.GameManager.getDefaultSpellsList;
 
+/**
+ * The type Default values.
+ */
 public class DefaultValues {
 
+    /**
+     * Lecture du fichier des monstres
+     * Si la lecture échoue, renvoie une liste par défaut
+     * @return la liste des monstres lus depuis le fichier texte
+     */
     public static ArrayList<Mover> getMonstersListFile() {
         ArrayList<Mover> lstMonsters = new ArrayList<>();
         try {
