@@ -53,6 +53,6 @@ public class Degats extends Spell implements Serializable {
      */
     @Override
     public String toString() {
-        return "Degats -" + (int)(hpDamage * GameManager.player.getDamageIncrease()) + "hp - " + super.toString();
+        return "Degats -" + hpDamage + "hp - " + super.toString();
     }
 }

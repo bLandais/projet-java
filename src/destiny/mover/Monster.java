@@ -87,9 +87,7 @@ public class Monster extends Mover implements Boss, Serializable {
     private Degats getDamageSpell() {
         for(Spell s : spells) {
             if(s instanceof Degats) {
-                if(s.getTarget() != null) {
-                    ((Degats) s).setHpDamage((int) (super.getDamageIncrease() * ((Degats) s).getHpDamage()));
-                }
+                ((Degats) s).setHpDamage((int) (super.getDamageIncrease() * ((Degats) s).getHpDamage()));
                 return (Degats) s;
             }
         }
