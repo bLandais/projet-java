@@ -20,7 +20,7 @@ Rendu de projet le 28 Novembre à 8h. Envoyer par mail le projet contenant:
 ### Lancer une partie :
 
 * Lancer le programme
-* Sélectionner le type de jeu (New game : 1 , A partir d'un fichier de sauvegarde : 0 )
+* Sélectionner le type de jeu (New game : n , A partir d'un fichier de sauvegarde : y )
 * Choisir son nom (si Nouvelle partie)
 * Le jeu commence
 
@@ -28,9 +28,9 @@ Rendu de projet le 28 Novembre à 8h. Envoyer par mail le projet contenant:
 
 * **BOUCLE** : ( A chaque execution succeptible de modifier la vie : rappel de la vie des combattants)
     * Rencontre avec le monstre
-    * Selectionner l'action à réaliser ( 0 : attaque , 1: soin , 2: boost de degats pour les 2 tours suivants) (Utilisation de l'inventaire "I"
+    * Selectionner l'action à réaliser ( 0 : attaque , 1: soin , 2: boost de degats pour les 2 tours suivants) (Utilisation de l'inventaire "l"
     possible uniquement pendant le tour du joueur et avant de sélectionner une action)
-    * Affichage des conséquences de l'action ( si 0 : Perte de pdv du monstre , si 1: gain de pdv du joueur , si 2: ......)
+    * Affichage des conséquences de l'action ( si 0 : Perte de pdv du monstre , si 1: gain de pdv du joueur , si 2: augmentation de l'attaque du joueur pour 2 tours)
     * Tour du Monstre
 * **SORTIE DE BOUCLE** si :
     * Monstre vaincu (retour dans une nouvelle boucle avec nouveau monstre)
@@ -40,19 +40,17 @@ Rendu de projet le 28 Novembre à 8h. Envoyer par mail le projet contenant:
 
 * **JOUEUR**:
     * PDV de base : 200
-    * Chance d'esquive de base : 5%
-    * Chance de CoupCritique de base : 20% --> hausse des degats de 50%
-    * Chance d'echec critique de base: 5% --> echec de l'attaque
+    * Defense de base: 200
+    * Degats de base : 100%
 
 
 * **MONSTRES ( Monstre 1 au Monstre 11)**:
     * PDV : 120 Pv ( +10 Pv par monstre suivant par rapport au précédent )
-    * Chance d'esquive : 5% (+1% par monstre suivant)
-    * Chance de coup critique : 10% (+2% par monstre suivant)
-    * Chance d'echec critique : 8% (-0,5% par monstre suivant)
+    * Défense de base : 200
+    * Dégâts de base : 100%
 
 * **BOSS**:
-    * PDV : 300 PV
+    * PDV : 400 PV
     * Chance d'esquive : 20%
     * Chance de CC : 33%
     * Chance d'echec critique : 3%
@@ -62,15 +60,11 @@ Rendu de projet le 28 Novembre à 8h. Envoyer par mail le projet contenant:
 * **SORTS JOUEUR**:
     * Attaque : Utilisable chaque tour ! Enleve 100PDV au monstre de base
     * Soin : Temps de recharge de 3 tours avant réutilisation
-        * Effet : Soigne le joueur à hauteur de 20% de ses PDV max
+        * Effet : Soigne le joueur à hauteur de 60 PDV
 
-    * Boost : Temps de recharge de 4 tours avant réutilisation
-        * Effet : 
-            Chance de CC portée à 100%
-            Chance d  EC portée à 0%
-            Chance de Double coup : 33%
-            Chance de triple coup : 10%
-            Chance de OS : 3% (sauf BOSS)
+    * Soutiens: Utilisable chaque tour
+        * Effet : Augmente les degats de 10% jusque la fin du combat avec le monstre actuel
+
 
 * **INVENTAIRE** :
 
